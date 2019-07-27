@@ -12,8 +12,8 @@ def _rippleCarry(a):
   carry, result = reduce(f, reversed(a), (0, []))
   result = list(reversed(result))
   # since carry can be > 10, split it into its digits
-  carry = list(filter(lambda x: x!=0, map(lambda x: int(x), str(carry))))
-  return carry + result 
+  carry = list(map(lambda x: int(x), str(carry)))
+  return carry + result if carry != [0] else result
 
 def _prependZeroes(a, num_zeroes):
    return [0] * num_zeroes + a
@@ -30,6 +30,7 @@ class TestVeryArbitraryPrecision(unittest.TestCase):
     self.assertEqual(add([1,2,3],[1,2,3]), [2,4,6])
     self.assertEqual(add([9,9,9],[9,9,9]), [1,9,9,8])
     self.assertEqual(add([243,53,9],[42,0,18]), [2,9,0,5,7])
+    self.assertEqual(add([100],[1]), [1,0,1])
 
   def testRippleCarry(self):
     self.assertEqual(_rippleCarry([1, 11]), [2, 1]) 
@@ -39,6 +40,7 @@ class TestVeryArbitraryPrecision(unittest.TestCase):
     self.assertEqual(_rippleCarry([2,342]), [3,6,2]) 
     self.assertEqual(_rippleCarry([1, 2,53342]), [5,3,4,6,2]) 
     self.assertEqual(_rippleCarry([642,2]), [6,4,2,2]) 
+    self.assertEqual(_rippleCarry([100]), [1,0,0]) 
 
   def testPrependZeroes(self):
     self.assertEqual(_prependZeroes([1], 5), [0,0,0,0,0,1])
