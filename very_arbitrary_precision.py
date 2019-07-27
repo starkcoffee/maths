@@ -18,17 +18,18 @@ def _rippleCarry(a):
 def _prependZeroes(a, num_zeroes):
    return [0] * num_zeroes + a
 
-class TestBig(unittest.TestCase):
+class TestVeryArbitraryPrecision(unittest.TestCase):
 
   def testAdd(self):
-    #self.assertEqual(add([], []), [0])
-    #self.assertEqual(add([1], []), [1])
-    #self.assertEqual(add([], [1]), [1])
+    self.assertEqual(add([], []), [])
+    self.assertEqual(add([1], []), [1])
+    self.assertEqual(add([], [1]), [1])
     self.assertEqual(add([1],[1]), [2])
     self.assertEqual(add([1,2,3],[1]), [1,2,4])
     self.assertEqual(add([1],[1,2,3]), [1,2,4])
     self.assertEqual(add([1,2,3],[1,2,3]), [2,4,6])
     self.assertEqual(add([9,9,9],[9,9,9]), [1,9,9,8])
+    self.assertEqual(add([243,53,9],[42,0,18]), [2,9,0,5,7])
 
   def testRippleCarry(self):
     self.assertEqual(_rippleCarry([1, 11]), [2, 1]) 
