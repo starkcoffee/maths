@@ -1,6 +1,18 @@
 import unittest
 from functools import reduce
 
+class Anum:
+
+  def __init__(self, wholePart):
+    self.w = wholePart
+
+  def __add__(self, other):
+    return Anum(add(self.w, other.w))
+
+  def __eq__(self, other):
+    if isinstance(other, Anum):
+      return self.w == other.w
+    return False
 
 def add(a, b):
   c, d = (_prependZeroes(a, len(b)-len(a)), _prependZeroes(b, len(a)-len(b)))
@@ -19,6 +31,18 @@ def _prependZeroes(a, num_zeroes):
    return [0] * num_zeroes + a
 
 class TestVeryArbitraryPrecision(unittest.TestCase):
+
+  def testAnumSetsPartsCorrectly(self):
+    n = Anum([1])
+    self.assertEqual(n.w, [1])
+
+  def testAnumCanAddToAnother(self):
+    self.assertEqual(Anum([1]) + Anum([1]), Anum([2]))
+
+  def testEquals(self):
+    self.assertEqual(Anum([1]), Anum([1]))
+    self.assertNotEqual(Anum([1]), Anum([2]))
+    self.assertNotEqual(Anum([1]), 1)
 
   def testAdd(self):
     self.assertEqual(add([], []), [])
