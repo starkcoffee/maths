@@ -1,48 +1,19 @@
 import unittest
-from functools import reduce
+from arbitrary_arithmetic import add, _rippleCarry, _prependZeroes
 
-class Anum:
+class ArbitraryArithmeticTest(unittest.TestCase):
 
-  def __init__(self, wholePart):
-    self.w = wholePart
-
-  def __add__(self, other):
-    return Anum(add(self.w, other.w))
-
-  def __eq__(self, other):
-    if isinstance(other, Anum):
-      return self.w == other.w
-    return False
-
-def add(a, b):
-  c, d = (_prependZeroes(a, len(b)-len(a)), _prependZeroes(b, len(a)-len(b)))
-  return _rippleCarry([ x+y for x, y in zip(c, d) ])
-
-def _rippleCarry(a):
-  # carry is acc[0], result is acc[1] - assignment expressions in python 3.8
-  f = lambda acc, x:( (acc[0]+x) // 10, acc[1] + [(acc[0]+x) % 10] )
-  carry, result = reduce(f, reversed(a), (0, []))
-  result = list(reversed(result))
-  # since carry can be > 10, split it into its digits
-  carry = list(map(lambda x: int(x), str(carry)))
-  return carry + result if carry != [0] else result
-
-def _prependZeroes(a, num_zeroes):
-   return [0] * num_zeroes + a
-
-class TestVeryArbitraryPrecision(unittest.TestCase):
-
-  def testAnumSetsPartsCorrectly(self):
-    n = Anum([1])
-    self.assertEqual(n.w, [1])
-
-  def testAnumCanAddToAnother(self):
-    self.assertEqual(Anum([1]) + Anum([1]), Anum([2]))
-
-  def testEquals(self):
-    self.assertEqual(Anum([1]), Anum([1]))
-    self.assertNotEqual(Anum([1]), Anum([2]))
-    self.assertNotEqual(Anum([1]), 1)
+#  def testAnumSetsPartsCorrectly(self):
+#    n = Anum([1])
+#    self.assertEqual(n.w, [1])
+#
+#  def testAnumCanAddToAnother(self):
+#    self.assertEqual(Anum([1]) + Anum([1]), Anum([2]))
+#
+#  def testEquals(self):
+#    self.assertEqual(Anum([1]), Anum([1]))
+#    self.assertNotEqual(Anum([1]), Anum([2]))
+#    self.assertNotEqual(Anum([1]), 1)
 
   def testAdd(self):
     self.assertEqual(add([], []), [])
