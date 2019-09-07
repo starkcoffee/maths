@@ -3,18 +3,6 @@ from arbitrary_arithmetic import add, _rippleCarry, _prependZeroes
 
 class ArbitraryArithmeticTest(unittest.TestCase):
 
-#  def testAnumSetsPartsCorrectly(self):
-#    n = Anum([1])
-#    self.assertEqual(n.w, [1])
-#
-#  def testAnumCanAddToAnother(self):
-#    self.assertEqual(Anum([1]) + Anum([1]), Anum([2]))
-#
-#  def testEquals(self):
-#    self.assertEqual(Anum([1]), Anum([1]))
-#    self.assertNotEqual(Anum([1]), Anum([2]))
-#    self.assertNotEqual(Anum([1]), 1)
-
   def testAdd(self):
     self.assertEqual(add([], []), [])
     self.assertEqual(add([1], []), [1])
