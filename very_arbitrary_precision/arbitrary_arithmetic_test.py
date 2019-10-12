@@ -3,7 +3,7 @@ from arbitrary_arithmetic import add, _rippleCarry, _prependZeroes
 
 class ArbitraryArithmeticTest(unittest.TestCase):
 
-  def testAdd(self):
+  def testAddIntegers(self):
     self.assertEqual(add([], []), [])
     self.assertEqual(add([1], []), [1])
     self.assertEqual(add([], [1]), [1])
@@ -16,14 +16,14 @@ class ArbitraryArithmeticTest(unittest.TestCase):
     self.assertEqual(add([100],[1]), [1,0,1])
 
   def testRippleCarry(self):
-    self.assertEqual(_rippleCarry([1, 11]), [2, 1]) 
-    self.assertEqual(_rippleCarry([0]), [0]) 
-    self.assertEqual(_rippleCarry([1,2]), [1,2]) 
-    self.assertEqual(_rippleCarry([42,2]), [4,2,2]) 
-    self.assertEqual(_rippleCarry([2,342]), [3,6,2]) 
-    self.assertEqual(_rippleCarry([1, 2,53342]), [5,3,4,6,2]) 
-    self.assertEqual(_rippleCarry([642,2]), [6,4,2,2]) 
-    self.assertEqual(_rippleCarry([100]), [1,0,0]) 
+    self.assertEqual(_rippleCarry([1, 11]),(0, [2, 1])) 
+    self.assertEqual(_rippleCarry([0]), (0, [0])) 
+    self.assertEqual(_rippleCarry([1,2]), (0, [1,2])) 
+    self.assertEqual(_rippleCarry([42,2]), (4, [2,2])) 
+    self.assertEqual(_rippleCarry([2,342]), (3, [6,2])) 
+    self.assertEqual(_rippleCarry([1, 2,53342]), (53, [4,6,2])) 
+    self.assertEqual(_rippleCarry([642,2]), (64, [2,2])) 
+    self.assertEqual(_rippleCarry([100]), (10, [0])) 
 
   def testPrependZeroes(self):
     self.assertEqual(_prependZeroes([1], 5), [0,0,0,0,0,1])
