@@ -1,0 +1,15 @@
+[x] move into dir
+[x] learn about python modules
+[x] create separate module 
+[x] separate tests
+[x] separate Anum tests
+[x] create class file and import module
+[x] represent fractional part
+[ ] add with fractional part
+  [x] refactor rippleCarry to return the carry
+[x] see where anum tests are at
+  [x] refactor add to return the carry
+  [x] refactor anum to prepend the carry
+  [ ] refactor add to take padding direction
+  [ ] implement fractional adding with these
+  [ ] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
