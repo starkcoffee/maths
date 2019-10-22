@@ -11,7 +11,7 @@ class Anum:
       self.f = [0]
 
   def __add__(self, other):
-    
+    w1, w2 = prependZeroes(self.w, other.w) 
     carry, sum_w = add(self.w, other.w)
     if carry != 0:
       sum_w = splat(carry) + sum_w
