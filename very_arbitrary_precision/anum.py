@@ -1,4 +1,5 @@
-from arbitrary_arithmetic import add
+from arbitrary_arithmetic import *
+
 
 class Anum:
 
@@ -10,9 +11,10 @@ class Anum:
       self.f = [0]
 
   def __add__(self, other):
+    
     carry, sum_w = add(self.w, other.w)
     if carry != 0:
-      sum_w = list(map(lambda x: int(x), str(carry))) + sum_w
+      sum_w = splat(carry) + sum_w
     return Anum(sum_w, self.f)
 
   def __eq__(self, other):
@@ -25,4 +27,5 @@ class Anum:
 
   def __repr__(self):
     return str(self.w) + "," + str(self.f)
+
 

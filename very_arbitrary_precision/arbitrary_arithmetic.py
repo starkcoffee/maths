@@ -4,6 +4,9 @@ def add(a, b):
   c, d = (_prependZeroes(a, len(b)-len(a)), _prependZeroes(b, len(a)-len(b)))
   return _rippleCarry([ x+y for x, y in zip(c, d) ])
 
+def splat(carry):
+  return list(map(lambda x: int(x), str(carry)))
+
 def _rippleCarry(a):
   # carry is acc[0], result is acc[1] - assignment expressions in python 3.8
   f = lambda acc, x:( (acc[0]+x) // 10, acc[1] + [(acc[0]+x) % 10] )

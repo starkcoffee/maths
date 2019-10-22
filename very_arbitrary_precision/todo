@@ -7,7 +7,7 @@
 [x] represent fractional part
 [ ] add with fractional part
   [x] refactor rippleCarry to return the carry
-[x] see where anum tests are at
+  [x] see where anum tests are at
   [x] refactor add to return the carry
   [x] refactor anum to prepend the carry
   [ ] refactor add to take padding direction
