@@ -12,7 +12,7 @@ class Anum:
 
   def __add__(self, other):
     w1, w2 = prependZeroes(self.w, other.w) 
-    carry, sum_w = add(self.w, other.w)
+    carry, sum_w = zip_add(w1, w2)  
     if carry != 0:
       sum_w = splat(carry) + sum_w
     return Anum(sum_w, self.f)

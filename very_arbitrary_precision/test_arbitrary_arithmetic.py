@@ -3,6 +3,16 @@ from arbitrary_arithmetic import *
 
 class ArbitraryArithmeticTest(unittest.TestCase):
 
+  def testZipAdd(self):
+    self.assertEqual(zip_add([], []), (0, []))
+    self.assertEqual(zip_add([1],[1]), (0, [2]))
+    self.assertEqual(zip_add([1],[9]), (1, [0]))
+
+  def testZipAddWarnsWhenArrayLengthsDifferent(self):
+    with self.assertRaises(ValueError):
+      zip_add([1,2], [1])
+
+  @unittest.skip("")
   def testAddIntegers(self):
     self.assertEqual(add([], []), (0, []))
     self.assertEqual(add([1], []), (0, [1]))
