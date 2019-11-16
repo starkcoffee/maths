@@ -3,12 +3,10 @@ from arbitrary_arithmetic import *
 
 class Anum:
 
-  def __init__(self, wholePart, fractionPart=None):
-    self.w = wholePart
-    if fractionPart != None:
-      self.f = fractionPart 
-    else:
-      self.f = [0]
+  def __init__(self, wholePart, fractionPart=[]):
+    replaceEmptyArray = lambda x: [0] if x==[] else x 
+    self.w = replaceEmptyArray(wholePart)
+    self.f = replaceEmptyArray(fractionPart)
 
   def __add__(self, other):
     w1, w2 = prependZeroes(self.w, other.w) 

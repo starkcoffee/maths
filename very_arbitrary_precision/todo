@@ -14,6 +14,7 @@
   [x] change add to zip_add
     [x] add tests to see what happens if diff lengths
   [ ] move add tests to anum test
+    [ ] decide how to treat empty arrays
   [ ] refactor add to take padding direction
   [ ] implement fractional adding with these
   [ ] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
