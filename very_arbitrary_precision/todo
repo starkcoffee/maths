@@ -13,8 +13,12 @@
   [x] create build script
   [x] change add to zip_add
     [x] add tests to see what happens if diff lengths
-  [ ] move add tests to anum test
-    [ ] decide how to treat empty arrays
+  [x] move add tests to anum test
+    [x] decide how to treat empty arrays
+    [x] add test for abitrary precision
   [ ] refactor add to take padding direction
   [ ] implement fractional adding with these
   [ ] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
+
+[ ] finish reading https://rushter.com/blog/python-integer-implementation/
+
