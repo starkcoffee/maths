@@ -38,12 +38,13 @@ class AnumTest(unittest.TestCase):
 
   @unittest.skip("")
   def testCanAddRationalNumbersTogether(self):
+    self.assertEqual(Anum([1], [1]) + Anum([0], [1]), Anum([1], [2]))
     self.assertEqual(Anum([1]) + Anum([0], [1,2,3]), Anum([1], [1,2,3]))
     self.assertEqual(Anum([1], [1,2,3]) + Anum([1], [1,2,3]), Anum([2], [2,4,6]))
     self.assertEqual(Anum([1], [9,9,9]) + Anum([0], [0,0,1]), Anum([2], [0,0,0]))
-    self.assertEqual(Anum([1], [9]) + Anum([0], [0,9,9]), Anum([1], [9,9,9]))
-    self.assertEqual(Anum([1], [9]) + Anum([0], [9,9]), Anum([2], [8,9]))
-    self.assertEqual(Anum([1], [9]) + Anum([0], [9,9,0]), Anum([2], [8,9,0]))
+    #self.assertEqual(Anum([1], [9]) + Anum([0], [0,9,9]), Anum([1], [9,9,9]))
+    #self.assertEqual(Anum([1], [9]) + Anum([0], [9,9]), Anum([2], [8,9]))
+    #self.assertEqual(Anum([1], [9]) + Anum([0], [9,9,0]), Anum([2], [8,9,0]))
 
   def testEquals(self):
     self.assertEqual(Anum([1]), Anum([1]))

@@ -4,9 +4,12 @@ from arbitrary_arithmetic import *
 class ArbitraryArithmeticTest(unittest.TestCase):
 
   def testZipAdd(self):
+    self.assertEqual(zip_add([]), (0, []))
     self.assertEqual(zip_add([], []), (0, []))
     self.assertEqual(zip_add([1],[1]), (0, [2]))
     self.assertEqual(zip_add([1],[9]), (1, [0]))
+    self.assertEqual(zip_add([1],[9],[1]), (1, [1]))
+    self.assertEqual(zip_add([8],[8],[8]), (2, [4]))
 
   def testZipAddWarnsWhenArrayLengthsDifferent(self):
     with self.assertRaises(ValueError):
@@ -27,6 +30,12 @@ class ArbitraryArithmeticTest(unittest.TestCase):
     self.assertEqual(prependZeroes([2,0,0,0,0,0], [1]), ([2,0,0,0,0,0], [0,0,0,0,0,1]))
     self.assertEqual(prependZeroes([1], [1]), ([1], [1]))
     self.assertEqual(prependZeroes([], [1]), ([0], [1]))
+
+  def testAppendZeroes(self):
+    self.assertEqual(appendZeroes([1], [0,0,0,0,0,2]), ([1,0,0,0,0,0], [0,0,0,0,0,2]))
+    self.assertEqual(appendZeroes([2,0,0,0,0,0], [1]), ([2,0,0,0,0,0], [1,0,0,0,0,0]))
+    self.assertEqual(appendZeroes([1], [1]), ([1], [1]))
+    self.assertEqual(appendZeroes([], [1]), ([0], [1]))
 
 if __name__ == '__main__':
     unittest.main()

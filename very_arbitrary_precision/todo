@@ -16,8 +16,11 @@
   [x] move add tests to anum test
     [x] decide how to treat empty arrays
     [x] add test for abitrary precision
-  [ ] refactor add to take padding direction
+  [x] refactor add to take padding direction
   [ ] implement fractional adding with these
+    [x] change zip_add to take more than 2 args
+    [ ] be able to prepend / append for all operands
+      [ ] change to padleft / padright
   [ ] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
