@@ -5,7 +5,7 @@
 [x] separate Anum tests
 [x] create class file and import module
 [x] represent fractional part
-[ ] add with fractional part
+[x] add with fractional part
   [x] refactor rippleCarry to return the carry
   [x] see where anum tests are at
   [x] refactor add to return the carry
@@ -17,11 +17,12 @@
     [x] decide how to treat empty arrays
     [x] add test for abitrary precision
   [x] refactor add to take padding direction
-  [ ] implement fractional adding with these
+  [x] implement fractional adding with these
     [x] change zip_add to take more than 2 args
     [x] be able to prepend / append for all operands
     [x] refactor to use map
-  [ ] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
+  [x] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
+    [x] get test to work
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
 

@@ -16,7 +16,7 @@ class Anum:
 
     # add whole parts
     max_len_w = max_len(self.w, other.w)
-    padded_w_parts = list(map(lambda a: prependZeroes(a, max_len_w-len(a)), [self.w, other.w]))
+    padded_w_parts = list(map(lambda a: prependZeroes(a, max_len_w-len(a)), [self.w, other.w, [carry_f]]))
     carry_w, sum_w = zip_add(*padded_w_parts)  
 
     if carry_w != 0:
