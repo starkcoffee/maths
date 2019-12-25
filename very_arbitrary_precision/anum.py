@@ -10,12 +10,14 @@ class Anum:
 
   def __add__(self, other):
     # add fractional parts
-    f1, f2 = appendZeroes(self.f, other.f) 
-    carry_f, sum_f = zip_add(f1, f2)    
+    max_len_f = max_len(self.f, other.f)
+    padded_f_parts = list(map(lambda a: appendZeroes(a, max_len_f-len(a)), [self.f, other.f]))
+    carry_f, sum_f = zip_add(*padded_f_parts)    
 
     # add whole parts
-    w1, w2 = prependZeroes(self.w, other.w) 
-    carry_w, sum_w = zip_add(w1, w2)  
+    max_len_w = max_len(self.w, other.w)
+    padded_w_parts = list(map(lambda a: prependZeroes(a, max_len_w-len(a)), [self.w, other.w]))
+    carry_w, sum_w = zip_add(*padded_w_parts)  
 
     if carry_w != 0:
       sum_w = splat(carry_w) + sum_w

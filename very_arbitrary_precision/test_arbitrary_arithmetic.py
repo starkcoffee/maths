@@ -26,16 +26,16 @@ class ArbitraryArithmeticTest(unittest.TestCase):
     self.assertEqual(rippleCarry([100]), (10, [0])) 
 
   def testPrependZeroes(self):
-    self.assertEqual(prependZeroes([1], [2,0,0,0,0,0]), ([0,0,0,0,0,1], [2,0,0,0,0,0]))
-    self.assertEqual(prependZeroes([2,0,0,0,0,0], [1]), ([2,0,0,0,0,0], [0,0,0,0,0,1]))
-    self.assertEqual(prependZeroes([1], [1]), ([1], [1]))
-    self.assertEqual(prependZeroes([], [1]), ([0], [1]))
+    self.assertEqual(prependZeroes([1], 5), [0,0,0,0,0,1])
+    self.assertEqual(prependZeroes([1,1], 1), [0,1,1])
+    self.assertEqual(prependZeroes([1], 0), [1])
+    self.assertEqual(prependZeroes([1], -1), [1])
 
   def testAppendZeroes(self):
-    self.assertEqual(appendZeroes([1], [0,0,0,0,0,2]), ([1,0,0,0,0,0], [0,0,0,0,0,2]))
-    self.assertEqual(appendZeroes([2,0,0,0,0,0], [1]), ([2,0,0,0,0,0], [1,0,0,0,0,0]))
-    self.assertEqual(appendZeroes([1], [1]), ([1], [1]))
-    self.assertEqual(appendZeroes([], [1]), ([0], [1]))
+    self.assertEqual(appendZeroes([1], 5), [1,0,0,0,0,0])
+    self.assertEqual(appendZeroes([1,1], 1), [1,1,0])
+    self.assertEqual(appendZeroes([1], 0), [1])
+    self.assertEqual(appendZeroes([1], -1), [1])
 
 if __name__ == '__main__':
     unittest.main()

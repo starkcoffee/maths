@@ -10,6 +10,9 @@ def zip_add(*arrays):
 def splat(carry):
   return list(map(lambda x: int(x), str(carry)))
 
+def max_len(*arrays):
+  return max(map(lambda a: len(a), arrays))
+
 # returns tuple: (left-over-carry, array-with-ripple-applied)
 def rippleCarry(a):
   # carry is acc[0], result is acc[1] - assignment expressions in python 3.8
@@ -18,9 +21,9 @@ def rippleCarry(a):
   result = list(reversed(result))
   return (carry, result)
 
-def prependZeroes(a, b):
-  return ([0]*(len(b)-len(a))+a, [0]*(len(a)-len(b))+b)
+def prependZeroes(a, num):
+  return [0]*num + a
  
-def appendZeroes(a, b):
-  return (a + [0]*(len(b)-len(a)), b +[0]*(len(a)-len(b)))
+def appendZeroes(a, num):
+  return a + [0]*num 
 

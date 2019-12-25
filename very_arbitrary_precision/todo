@@ -19,8 +19,8 @@
   [x] refactor add to take padding direction
   [ ] implement fractional adding with these
     [x] change zip_add to take more than 2 args
-    [ ] be able to prepend / append for all operands
-      [ ] change to padleft / padright
+    [x] be able to prepend / append for all operands
+    [x] refactor to use map
   [ ] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
