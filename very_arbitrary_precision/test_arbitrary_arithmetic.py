@@ -37,5 +37,13 @@ class ArbitraryArithmeticTest(unittest.TestCase):
     self.assertEqual(appendZeroes([1], 0), [1])
     self.assertEqual(appendZeroes([1], -1), [1])
 
+  def testHydratePowers(self):
+    self.assertEqual(hydratePowers([1, 2, 3]), [100, 20, 3])
+    self.assertEqual(hydratePowers([3]), [3])
+
+  def testRemovePowers(self):
+    self.assertEqual(removePowers([100, 20, 3]), [1, 2, 3])
+    self.assertEqual(type(removePowers([100, 20, 3])[0]), int)
+
 if __name__ == '__main__':
     unittest.main()

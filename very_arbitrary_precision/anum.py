@@ -1,4 +1,5 @@
 from arbitrary_arithmetic import *
+from functools import reduce
 
 
 class Anum:
@@ -22,6 +23,11 @@ class Anum:
     if carry_w != 0:
       sum_w = splat(carry_w) + sum_w
     return Anum(sum_w, sum_f)
+
+  def __mul__(self, other):
+    products = [[j*k for k in hydratePowers(self.w)] for j in hydratePowers(other.w)]
+    products = [ removePowers(a) for a in products ]
+    return reduce(lambda acc, x: Anum(x) + acc, products, Anum([0]))
 
   def __eq__(self, other):
     if isinstance(other, Anum):

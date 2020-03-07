@@ -27,3 +27,10 @@ def prependZeroes(a, num):
 def appendZeroes(a, num):
   return a + [0]*num 
 
+# turns digits into power of ten eg.
+# [1, 2, 3] => [100, 20, 3]
+def hydratePowers(a):
+    return [i*pow(10, len(a)-ind-1) for ind, i in enumerate(a)]
+
+def removePowers(a):
+    return [i // pow(10, len(a)-ind-1) for ind, i in enumerate(a)]
