@@ -25,9 +25,11 @@ class Anum:
     return Anum(sum_w, sum_f)
 
   def __mul__(self, other):
-    products = [[j*k for k in hydratePowers(self.w)] for j in hydratePowers(other.w)]
-    products = [ removePowers(a) for a in products ]
-    return reduce(lambda acc, x: Anum(x) + acc, products, Anum([0]))
+    a,b = hydratePowers(self.w), hydratePowers(other.w)
+    products = [[i*j for j in b] for i in a]
+    products = [removePowers(a) for a in products]
+    anum_products = [Anum(a) for a in products]
+    return reduce(lambda acc, x: x + acc, anum_products, Anum([0]))
 
   def __eq__(self, other):
     if isinstance(other, Anum):
