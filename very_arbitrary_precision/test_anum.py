@@ -49,7 +49,9 @@ class AnumTest(unittest.TestCase):
   def testCanMultiply(self):
     self.assertEqual(Anum([1]) * Anum([2]), Anum([2]))
     self.assertEqual(Anum([1,1]) * Anum([2]), Anum([2,2]))
+    self.assertEqual(Anum([1]) * Anum([2,2]), Anum([2,2]))
     self.assertEqual(Anum([1,1]) * Anum([2,2]), Anum([2,4,2]))
+    self.assertEqual(Anum([1] + [0]*9) * Anum([5,0]), Anum([5] + [0]*10))
 
   def testEquals(self):
     self.assertEqual(Anum([1]), Anum([1]))
