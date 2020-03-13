@@ -34,3 +34,4 @@ def hydratePowers(a):
 
 def removePowers(a):
     return [i // pow(10, len(a)-ind-1) for ind, i in enumerate(a)]
+

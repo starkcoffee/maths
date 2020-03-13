@@ -23,6 +23,9 @@
     [x] refactor to use map
   [x] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
     [x] get test to work
+[ ] multiplication
+  [x] whole numbers
+  [ ] fractional parts
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
 
