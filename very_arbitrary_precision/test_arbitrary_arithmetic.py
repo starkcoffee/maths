@@ -45,5 +45,8 @@ class ArbitraryArithmeticTest(unittest.TestCase):
     self.assertEqual(removePowers([100, 20, 3]), [1, 2, 3])
     self.assertEqual(type(removePowers([100, 20, 3])[0]), int)
 
+  def testExpand(self):
+    self.assertEqual(expand([3,2,5], [1,2,3]), [[3,6,9,0,0], [2,4,6,0], [5,10,15]])
+
 if __name__ == '__main__':
     unittest.main()

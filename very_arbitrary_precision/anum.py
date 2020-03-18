@@ -24,17 +24,8 @@ class Anum:
       sum_w = splat(carry_w) + sum_w
     return Anum(sum_w, sum_f)
 
-  # [1,2,3] * [3,2,5]
-  # = [3,6,9,0,0] + [2,4,6,0] + [5,10,15]
-  # = [3,9,9,7,5]
   def __mul__(self, other):
-    # performance improvement
-    multiplier, multiplicand = self.w, other.w
-    if len(other.w) < len(self.w):
-      multiplier, multiplicand = other.w, self.w
-      
-    power = lambda index: len(multiplier)-index-1 
-    products = [[i*j for j in multiplicand] + [0]*power(index) for index, i in enumerate(multiplier)]
+    products = expand(self.w, other.w)
     anum_products = [Anum(a) for a in products]
     return reduce(lambda acc, x: x + acc, anum_products, Anum([0]))
 

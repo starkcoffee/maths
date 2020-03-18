@@ -1,5 +1,13 @@
 from functools import reduce
 
+def expand(a, b):
+    # performance improvement
+    multiplier, multiplicand = a, b
+    if len(b) < len(a):
+      multiplier, multiplicand = b, a
+      
+    power = lambda index: len(multiplier)-index-1 
+    return [[i*j for j in multiplicand] + [0]*power(index) for index, i in enumerate(multiplier)]
 
 def zip_add(*arrays):
   if len(set([ len(a) for a in arrays ])) != 1:
