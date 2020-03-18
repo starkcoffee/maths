@@ -25,6 +25,8 @@
     [x] get test to work
 [ ] multiplication
   [x] whole numbers
+    [ ] perf test
+      [ ] separate test class
   [ ] fractional parts
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/

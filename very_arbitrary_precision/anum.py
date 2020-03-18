@@ -28,8 +28,13 @@ class Anum:
   # = [3,6,9,0,0] + [2,4,6,0] + [5,10,15]
   # = [3,9,9,7,5]
   def __mul__(self, other):
-    power = lambda index: len(self.w)-index-1 
-    products = [[i*j for j in other.w] + [0]*power(index) for index, i in enumerate(self.w)]
+    # performance improvement
+    multiplier, multiplicand = self.w, other.w
+    if len(other.w) < len(self.w):
+      multiplier, multiplicand = other.w, self.w
+      
+    power = lambda index: len(multiplier)-index-1 
+    products = [[i*j for j in multiplicand] + [0]*power(index) for index, i in enumerate(multiplier)]
     anum_products = [Anum(a) for a in products]
     return reduce(lambda acc, x: x + acc, anum_products, Anum([0]))
 
