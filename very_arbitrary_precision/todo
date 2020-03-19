@@ -28,8 +28,10 @@
     [x] perf test
       [x] separate test class
     [x] test for swapping operands for performance
-    [ ] skip zeroes for performance
+    [x] skip zeroes for performance
   [ ] fractional parts
+    [ ] implement div by zero
+      [ ] munch trailing zeroes
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
 

@@ -25,9 +25,14 @@ class Anum:
     return Anum(sum_w, sum_f)
 
   def __mul__(self, other):
-    products = expand(self.w, other.w)
-    anum_products = [Anum(a) for a in products]
-    return reduce(lambda acc, x: x + acc, anum_products, Anum([0]))
+    sum_anums = lambda products: reduce(lambda acc, x: x + acc, products, Anum([0]))
+
+    products1 = expand(self.w, other.w)
+    sum1 = sum_anums([Anum(a) for a in products1])
+
+    products2 = expand(self.w, other.f)
+    sum2 = sum_anums([Anum(a) for a in products2]) 
+    return sum1 + sum2
 
   def __eq__(self, other):
     if isinstance(other, Anum):
@@ -40,4 +45,8 @@ class Anum:
   def __repr__(self):
     return str(self.w) + "," + str(self.f)
 
+  def divByPowerOfTen(self, power):
+    f = self.w[-power:] + self.f
+    w = self.w[0:len(self.w)-power]
+    return Anum(w, f)
 
