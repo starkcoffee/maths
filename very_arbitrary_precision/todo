@@ -25,8 +25,10 @@
     [x] get test to work
 [ ] multiplication
   [x] whole numbers
-    [ ] perf test
-      [ ] separate test class
+    [x] perf test
+      [x] separate test class
+    [x] test for swapping operands for performance
+    [ ] skip zeroes for performance
   [ ] fractional parts
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
