@@ -48,5 +48,6 @@ class Anum:
   def divByPowerOfTen(self, power):
     f = self.w[-power:] + self.f
     w = self.w[0:len(self.w)-power]
+    f = removeTrailingZeroes(f)
     return Anum(w, f)
 

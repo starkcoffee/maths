@@ -1,8 +1,9 @@
 from functools import reduce
+from itertools import dropwhile
 
 def expand(a, b):
     multiplier, multiplicand = a, b
-    # performance improvement
+    # optimization
     if len(b) < len(a):
       multiplier, multiplicand = b, a
       
@@ -10,7 +11,7 @@ def expand(a, b):
     return [
       [i*j for j in multiplicand] + [0]*power(index) 
       for index, i in enumerate(multiplier) 
-    # performance improvement
+    # optimization
       if i != 0
     ]
 
@@ -39,6 +40,12 @@ def prependZeroes(a, num):
  
 def appendZeroes(a, num):
   return a + [0]*num 
+
+def removeTrailingZeroes(a):
+  if len(a) <=1:
+    return a
+
+  return list(reversed(list(dropwhile(lambda x: x==0, reversed(a)))))
 
 # turns digits into power of ten eg.
 # [1, 2, 3] => [100, 20, 3]

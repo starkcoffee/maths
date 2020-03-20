@@ -55,5 +55,11 @@ class ArbitraryArithmeticTest(unittest.TestCase):
   def testExpandOptimizationSkipZeroes(self):
     self.assertEqual(expand([1,0,0], [1,0,0]), [[1,0,0,0,0]])
 
+  def testRemoveTrailingZeroes(self):
+    self.assertEqual(removeTrailingZeroes([1,0,0]), [1])
+    self.assertEqual(removeTrailingZeroes([1,1,1]), [1,1,1])
+    self.assertEqual(removeTrailingZeroes([0,0,1]), [0,0,1])
+    self.assertEqual(removeTrailingZeroes([0]), [0])
+
 if __name__ == '__main__':
     unittest.main()
