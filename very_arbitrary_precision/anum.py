@@ -46,8 +46,9 @@ class Anum:
     return str(self.w) + "," + str(self.f)
 
   def divByPowerOfTen(self, power):
-    f = self.w[-power:] + self.f
-    w = self.w[0:len(self.w)-power]
-    f = removeTrailingZeroes(f)
-    return Anum(w, f)
+    padded_w = prependZeroes(self.w, power-len(self.w))
+    new_w = padded_w[0:len(padded_w)-power]
+    new_f = padded_w[-power:] + self.f
+    new_f = removeTrailingZeroes(new_f)
+    return Anum(new_w, new_f)
 

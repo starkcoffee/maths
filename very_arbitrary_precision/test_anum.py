@@ -59,8 +59,11 @@ class AnumTest(unittest.TestCase):
 
   def testDivByPowerOfTen(self):
     self.assertEqual(Anum([1,0]).divByPowerOfTen(1), Anum([1],[0]))
-    #self.assertEqual(Anum([1,0]).divByPowerOfTen(3), Anum([1]))
-    
+    self.assertEqual(Anum([1,0]).divByPowerOfTen(3), Anum([0],[0,1]))
+    self.assertEqual(Anum([0]).divByPowerOfTen(3), Anum([0],[0]))
+    self.assertEqual(Anum([1]).divByPowerOfTen(3), Anum([0],[0,0,1]))
+    self.assertEqual(Anum([0],[1]).divByPowerOfTen(3), Anum([0],[0,0,0,1]))
+    self.assertEqual(Anum([0],[1,2,3]).divByPowerOfTen(1), Anum([0],[0,1,2,3]))
 
   def testEquals(self):
     self.assertEqual(Anum([1]), Anum([1]))
