@@ -38,7 +38,7 @@ class Anum:
 
     products2 = expand(self.w, other.f)
     sum2 = sum_anums([Anum(a) for a in products2]) 
-    # sum2 = divByPowerOfTen(sum2, len(other.f))
+    sum2 = divByPowerOfTen(sum2, len(other.f))
     return sum1 + sum2
 
   def __eq__(self, other):

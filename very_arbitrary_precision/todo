@@ -30,8 +30,11 @@
     [x] test for swapping operands for performance
     [x] skip zeroes for performance
   [ ] fractional parts
-    [ ] implement div by zero
-      [ ] munch trailing zeroes
+    [x] implement div by ten
+      [x] munch trailing zeroes
+    [ ] move munching of trailing zeroes to anum constructor
+    [ ] test all ec cases
+[ ] remove leading zeroes in anum constructor
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
 

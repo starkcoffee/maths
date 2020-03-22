@@ -51,7 +51,7 @@ class AnumTest(unittest.TestCase):
     self.assertEqual(Anum([1]) * Anum([2,2]), Anum([2,2]))
     self.assertEqual(Anum([1,1]) * Anum([2,2]), Anum([2,4,2]))
     self.assertEqual(Anum([1] + [0]*9) * Anum([5,0]), Anum([5] + [0]*10))
-    #self.assertEqual(Anum([2]) * Anum([1], [1]), Anum([2],[2]))
+    self.assertEqual(Anum([2]) * Anum([1], [1]), Anum([2],[2]))
     #self.assertEqual(Anum([1],[1]) * Anum([2]), Anum([2],[2]))
     #self.assertEqual(Anum([2]) * Anum([0], [1]), Anum([0],[2]))
     #self.assertEqual(Anum([0], [1]) * Anum([2]), Anum([0],[2]))
