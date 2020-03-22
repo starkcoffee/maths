@@ -1,6 +1,12 @@
 from arbitrary_arithmetic import *
 from functools import reduce
 
+def divByPowerOfTen(a, power):
+  padded_w = prependZeroes(a.w, power-len(a.w))
+  result_w = padded_w[0:len(padded_w)-power]
+  result_f = padded_w[-power:] + a.f
+  result_f = removeTrailingZeroes(result_f)
+  return Anum(result_w, result_f)
 
 class Anum:
 
@@ -32,6 +38,7 @@ class Anum:
 
     products2 = expand(self.w, other.f)
     sum2 = sum_anums([Anum(a) for a in products2]) 
+    # sum2 = divByPowerOfTen(sum2, len(other.f))
     return sum1 + sum2
 
   def __eq__(self, other):
@@ -45,10 +52,4 @@ class Anum:
   def __repr__(self):
     return str(self.w) + "," + str(self.f)
 
-  def divByPowerOfTen(self, power):
-    padded_w = prependZeroes(self.w, power-len(self.w))
-    new_w = padded_w[0:len(padded_w)-power]
-    new_f = padded_w[-power:] + self.f
-    new_f = removeTrailingZeroes(new_f)
-    return Anum(new_w, new_f)
 

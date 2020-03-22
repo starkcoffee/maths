@@ -18,7 +18,6 @@ class AnumTest(unittest.TestCase):
     self.assertEqual(n.w, [1])
     self.assertEqual(n.f, [2,3,4])
 
-
   def testCanAddWholeNumbersTogether(self):
     self.assertEqual(Anum([]) + Anum([]), Anum([0]))
     self.assertEqual(Anum([1]) + Anum([]), Anum([1]))
@@ -58,12 +57,12 @@ class AnumTest(unittest.TestCase):
     #self.assertEqual(Anum([0], [1]) * Anum([2]), Anum([0],[2]))
 
   def testDivByPowerOfTen(self):
-    self.assertEqual(Anum([1,0]).divByPowerOfTen(1), Anum([1],[0]))
-    self.assertEqual(Anum([1,0]).divByPowerOfTen(3), Anum([0],[0,1]))
-    self.assertEqual(Anum([0]).divByPowerOfTen(3), Anum([0],[0]))
-    self.assertEqual(Anum([1]).divByPowerOfTen(3), Anum([0],[0,0,1]))
-    self.assertEqual(Anum([0],[1]).divByPowerOfTen(3), Anum([0],[0,0,0,1]))
-    self.assertEqual(Anum([0],[1,2,3]).divByPowerOfTen(1), Anum([0],[0,1,2,3]))
+    self.assertEqual(divByPowerOfTen(Anum([1,0]), 1), Anum([1],[0]))
+    self.assertEqual(divByPowerOfTen(Anum([1,0]), 3), Anum([0],[0,1]))
+    self.assertEqual(divByPowerOfTen(Anum([0]), 3), Anum([0],[0]))
+    self.assertEqual(divByPowerOfTen(Anum([1]), 3), Anum([0],[0,0,1]))
+    self.assertEqual(divByPowerOfTen(Anum([0],[1]), 3), Anum([0],[0,0,0,1]))
+    self.assertEqual(divByPowerOfTen(Anum([0],[1,2,3]), 1), Anum([0],[0,1,2,3]))
 
   def testEquals(self):
     self.assertEqual(Anum([1]), Anum([1]))
