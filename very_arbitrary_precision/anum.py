@@ -31,15 +31,21 @@ class Anum:
     return Anum(sum_w, sum_f)
 
   def __mul__(self, other):
-    sum_anums = lambda products: reduce(lambda acc, x: x + acc, products, Anum([0]))
+    sum_products = lambda products: reduce(lambda acc, x: x + acc, products, Anum([0]))
+    multiply = lambda a,b: sum_products([Anum(p) for p in expand(a,b)])
 
-    products1 = expand(self.w, other.w)
-    sum1 = sum_anums([Anum(a) for a in products1])
+    term1 = multiply(self.w, other.w)
 
-    products2 = expand(self.w, other.f)
-    sum2 = sum_anums([Anum(a) for a in products2]) 
-    sum2 = divByPowerOfTen(sum2, len(other.f))
-    return sum1 + sum2
+    term2 = multiply(self.w, other.f)
+    term2 = divByPowerOfTen(term2, len(other.f))
+
+    term3 = multiply(self.f, other.w)
+    term3 = divByPowerOfTen(term3, len(other.f))
+
+    term4 = multiply(self.f, other.f)
+    term4 = divByPowerOfTen(term4, len(self.f) + len(other.f))
+
+    return term1 + term2 + term3 + term4
 
   def __eq__(self, other):
     if isinstance(other, Anum):
