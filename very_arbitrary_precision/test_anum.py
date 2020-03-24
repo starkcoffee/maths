@@ -3,20 +3,25 @@ from anum import *
 
 class AnumTest(unittest.TestCase):
 
-  def testTreatsEmptyArraysAsZeroes(self):
+  def testConstructorTreatsEmptyArraysAsZeroes(self):
     n = Anum([], [])
     self.assertEqual(n.w, [0])
     self.assertEqual(n.f, [0])
 
-  def testSetsFractionToZeroByDefault(self):
+  def testConstructorSetsFractionToZeroByDefault(self):
     n = Anum([1])
     self.assertEqual(n.w, [1])
     self.assertEqual(n.f, [0])
 
-  def testStoresWholeAndFractionalPart(self):
+  def testConstructorStoresWholeAndFractionalPart(self):
     n = Anum([1], [2,3,4])
     self.assertEqual(n.w, [1])
     self.assertEqual(n.f, [2,3,4])
+
+  def testConstructorRemovesTrailingZeroes(self):
+    self.assertEqual(Anum([0], [0,1,0]), Anum([0], [0, 1]))
+    self.assertEqual(Anum([1], [0,0,0]), Anum([1], [0]))
+    self.assertEqual(Anum([1, 0, 0]), Anum([1,0,0]))
 
   def testCanAddWholeNumbersTogether(self):
     self.assertEqual(Anum([]) + Anum([]), Anum([0]))

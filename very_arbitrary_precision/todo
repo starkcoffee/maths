@@ -33,7 +33,8 @@
     [x] implement div by ten
       [x] munch trailing zeroes
     [ ] move munching of trailing zeroes to anum constructor
-    [ ] test all ec cases
+    [x] test all ec cases
+    [ ] add a big testcase
 [ ] remove leading zeroes in anum constructor
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/

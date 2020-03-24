@@ -5,7 +5,6 @@ def divByPowerOfTen(a, power):
   padded_w = prependZeroes(a.w, power-len(a.w))
   result_w = padded_w[0:len(padded_w)-power]
   result_f = padded_w[-power:] + a.f
-  result_f = removeTrailingZeroes(result_f)
   return Anum(result_w, result_f)
 
 class Anum:
@@ -13,7 +12,7 @@ class Anum:
   def __init__(self, wholePart, fractionPart=[]):
     replaceEmptyArray = lambda x: [0] if x==[] else x 
     self.w = replaceEmptyArray(wholePart)
-    self.f = replaceEmptyArray(fractionPart)
+    self.f = replaceEmptyArray(removeTrailingZeroes(fractionPart))
 
   def __add__(self, other):
     # add fractional parts
