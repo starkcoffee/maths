@@ -11,7 +11,7 @@ class Anum:
 
   def __init__(self, wholePart, fractionPart=[]):
     replaceEmptyArray = lambda x: [0] if x==[] else x 
-    self.w = replaceEmptyArray(wholePart)
+    self.w = replaceEmptyArray(removeLeadingZeroes(wholePart))
     self.f = replaceEmptyArray(removeTrailingZeroes(fractionPart))
 
   def __add__(self, other):

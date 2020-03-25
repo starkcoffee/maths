@@ -61,5 +61,11 @@ class ArbitraryArithmeticTest(unittest.TestCase):
     self.assertEqual(removeTrailingZeroes([0,0,1]), [0,0,1])
     self.assertEqual(removeTrailingZeroes([0]), [0])
 
+  def testRemoveLeadingZeroes(self):
+    self.assertEqual(removeLeadingZeroes([0,0,1]), [1])
+    self.assertEqual(removeLeadingZeroes([1]), [1])
+    self.assertEqual(removeLeadingZeroes([1,0,0]), [1,0,0])
+    self.assertEqual(removeLeadingZeroes([0]), [0])
+
 if __name__ == '__main__':
     unittest.main()

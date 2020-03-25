@@ -21,7 +21,12 @@ class AnumTest(unittest.TestCase):
   def testConstructorRemovesTrailingZeroes(self):
     self.assertEqual(Anum([0], [0,1,0]), Anum([0], [0, 1]))
     self.assertEqual(Anum([1], [0,0,0]), Anum([1], [0]))
-    self.assertEqual(Anum([1, 0, 0]), Anum([1,0,0]))
+    self.assertEqual(Anum([0]), Anum([0]))
+
+  def testConstructorRemovesLeadingZeroes(self):
+    self.assertEqual(Anum([0,0,1]), Anum([1]))
+    self.assertEqual(Anum([0,0,1], [0,0,1]), Anum([1], [0,0,1]))
+    self.assertEqual(Anum([0]), Anum([0]))
 
   def testCanAddWholeNumbersTogether(self):
     self.assertEqual(Anum([]) + Anum([]), Anum([0]))

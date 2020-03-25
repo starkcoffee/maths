@@ -41,6 +41,12 @@ def prependZeroes(a, num):
 def appendZeroes(a, num):
   return a + [0]*num 
 
+def removeLeadingZeroes(a):
+  if len(a) <=1:
+    return a
+
+  return list(dropwhile(lambda x: x==0,a))
+
 def removeTrailingZeroes(a):
   if len(a) <=1:
     return a
