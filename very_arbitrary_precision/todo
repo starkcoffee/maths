@@ -23,19 +23,19 @@
     [x] refactor to use map
   [x] anum can add fractions, add the carry, then add the whole numbers, then prepend the carry
     [x] get test to work
-[ ] multiplication
+[x] multiplication
   [x] whole numbers
     [x] perf test
       [x] separate test class
     [x] test for swapping operands for performance
     [x] skip zeroes for performance
-  [ ] fractional parts
+  [x] fractional parts
     [x] implement div by ten
       [x] munch trailing zeroes
-    [ ] move munching of trailing zeroes to anum constructor
+    [x] move munching of trailing zeroes to anum constructor
     [x] test all ec cases
-    [ ] add a big testcase
-[ ] remove leading zeroes in anum constructor
+    [x] add a big testcase
+[x] remove leading zeroes in anum constructor
 
 [ ] finish reading https://rushter.com/blog/python-integer-implementation/
 
