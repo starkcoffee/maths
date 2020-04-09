@@ -1,4 +1,5 @@
 import unittest
+import sqroot
 from sqroot import *
 
 class TestStuff(unittest.TestCase):
@@ -11,18 +12,18 @@ class TestStuff(unittest.TestCase):
     self.assertEqual(digByDigSqroot(1, 2), 1.0)
 
   def testGeneratePowersOf100(self):
-    powersof100gen = generatePowersOf100(31326)
+    powersof100gen = sqroot._generatePowersOf100(31326)
     listOfPowersOf100 = list(powersof100gen)
     self.assertEqual(listOfPowersOf100, [26, 13, 3])
     self.assertEqual(listOfPowersOf100.pop(), 3)
 
   def testClosestInSqrt(self):
-    self.assertEqual(closestIntSqrt(10), 3)
-    self.assertEqual(closestIntSqrt(0), 0)
-    self.assertEqual(closestIntSqrt(5000), 9)
+    self.assertEqual(sqroot._closestIntSqrt(10), 3)
+    self.assertEqual(sqroot._closestIntSqrt(0), 0)
+    self.assertEqual(sqroot._closestIntSqrt(5000), 9)
 
   def testHundreds(self):
-    val = hundreds(2_45_24_65_43)
+    val = sqroot._hundreds(2_45_24_65_43)
     self.assertEqual(next(val), 2)
     self.assertEqual(next(val), 45)
     self.assertEqual(next(val), 24)

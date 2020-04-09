@@ -39,7 +39,7 @@
 [x] find out how many digits of sqrt 2 I can print using float/double whatever - 16
 [ ] print arbitrary precision of sqrt 2
   [ ] implement digbydig sqrt algorithm with arbitrary precision
-    [ ] move module out of test file
+    [x] move module out of test file
 [ ] understand, with some experiments, IEEE floats
 [ ] print statements that tell me which digit it is evaluating
 
