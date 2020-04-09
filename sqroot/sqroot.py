@@ -14,16 +14,16 @@ def digByDigSqroot(n, desiredDigits):
   return x
 
 def _findY(x, powerOf10, remainder):
-  print("args", x, powerOf10, remainder)
+  print("finding next digit", x, powerOf10, remainder)
+
   newRemainder = remainder
-  for i in range(10):
+  for i in range(11):
     y = i* pow(10, powerOf10)
     diff = 2*x*y + y*y 
     if diff > remainder:
       return ((i-1)* pow(10, powerOf10), newRemainder)
     else:
       newRemainder = remainder - diff
-  return (i*pow(10, powerOf10), newRemainder)
 
 def _hundreds(n):
   while True:
