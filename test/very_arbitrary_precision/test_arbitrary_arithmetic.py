@@ -1,5 +1,5 @@
 import unittest
-from arbitrary_arithmetic import *
+from maths.very_arbitrary_precision.arbitrary_arithmetic import *
 
 class ArbitraryArithmeticTest(unittest.TestCase):
 

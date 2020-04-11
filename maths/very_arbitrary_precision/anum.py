@@ -1,4 +1,4 @@
-from arbitrary_arithmetic import *
+from .arbitrary_arithmetic import *
 from functools import reduce
 
 def divByPowerOfTen(a, power):

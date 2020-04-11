@@ -1,5 +1,5 @@
 import unittest
-from anum import *
+from maths.very_arbitrary_precision.anum import *
 
 class AnumTest(unittest.TestCase):
 

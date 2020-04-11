@@ -1,6 +1,6 @@
 import unittest
 import timeit
-from anum import *
+from maths.very_arbitrary_precision.anum import *
 
 class PerfMultTest(unittest.TestCase):
 

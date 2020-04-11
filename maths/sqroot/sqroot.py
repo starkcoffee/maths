@@ -20,6 +20,8 @@ def _findY(x, powerOf10, remainder):
   for i in range(11):
     y = i* pow(10, powerOf10)
     diff = 2*x*y + y*y 
+    #if powerOf10 < 12:
+    #  print(i, diff)
     if diff > remainder:
       return ((i-1)* pow(10, powerOf10), newRemainder)
     else:

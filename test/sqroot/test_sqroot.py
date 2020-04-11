@@ -1,6 +1,6 @@
 import unittest
-import sqroot
-from sqroot import *
+import maths.sqroot.sqroot as sqroot
+from maths.sqroot.sqroot import *
 
 class TestStuff(unittest.TestCase):
 
