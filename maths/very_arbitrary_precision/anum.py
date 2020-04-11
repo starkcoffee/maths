@@ -52,9 +52,9 @@ class Anum:
     return False
 
   def __str__(self):
-    return str(self.w) + "," + str(self.f)
+    return "".join([str(n) for n in self.w]) + "." + "".join([str(n) for n in self.f])
 
   def __repr__(self):
-    return str(self.w) + "," + str(self.f)
+    return self.__str__()
 
 

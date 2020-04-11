@@ -87,7 +87,7 @@ class AnumTest(unittest.TestCase):
     self.assertNotEqual(Anum([1]), 1)
 
   def testToStr(self):
-    self.assertEqual(str(Anum([1], [2, 3])), "[1],[2, 3]")  
+    self.assertEqual(str(Anum([1], [2, 3])), "1.23")  
 
 if __name__ == '__main__':
     unittest.main()
