@@ -55,6 +55,6 @@ class Anum:
     return "".join([str(n) for n in self.w]) + "." + "".join([str(n) for n in self.f])
 
   def __repr__(self):
-    return self.__str__()
+    return str(self.w) + "," + str(self.f)
 
 
