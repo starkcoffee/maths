@@ -1,10 +1,9 @@
 
 def digByDigSqroot(n, desiredDigits):
-  powersOf100 = list(_generatePowersOf100(n))
-  highestPowerOfHundered = powersOf100.pop()
+  units_highestHundredth, power_highestHundredth = _getHighestHundredthPower(n)
 
-  powOf10 = len(powersOf100)
-  x = _closestIntSqrt(highestPowerOfHundered) * pow(10, powOf10)
+  powOf10 = power_highestHundredth 
+  x = _closestIntSqrt(units_highestHundredth) * pow(10, powOf10)
   remainder = n - x*x
 
   for i in range(desiredDigits-1):
@@ -12,6 +11,17 @@ def digByDigSqroot(n, desiredDigits):
     (y, remainder) = _findY(x, powOf10, remainder)
     x = x+y
   return x
+
+def _getHighestHundredthPower(n):
+  units = n%100
+  power = 0
+  n = n // 100
+  while n > 0:
+    units = n%100
+    power = power + 1
+    n = n // 100
+
+  return units, power 
 
 def _findY(x, powerOf10, remainder):
   print("finding next digit", x, powerOf10, remainder)
@@ -27,26 +37,11 @@ def _findY(x, powerOf10, remainder):
     else:
       newRemainder = remainder - diff
 
-def _hundreds(n):
-  while True:
-    if n==0:
-      yield 0
-    else:
-      power = 100
-      while n // power > 0:
-        power=power*100
-      yield n // (power/100)
-      n = n % (power/100)
-      
 def _closestIntSqrt(n):
   for i in range(10):
     if i**2 > n:
       return i-1
   return i
 
-def _generatePowersOf100(n):
-  while n > 0:
-    yield n % 100
-    n = n // 100
 
 

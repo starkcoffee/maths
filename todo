@@ -40,6 +40,9 @@
 [ ] print arbitrary precision of sqrt 2
   [ ] implement digbydig sqrt algorithm with arbitrary precision
     [x] move module out of test file
+    [x] write a basic test
+    [x] reimplement powersOfHundred
+[ ] change algorithm to work also for numbers < 0
 [ ] understand, with some experiments, IEEE floats
 [ ] print statements that tell me which digit it is evaluating
 
