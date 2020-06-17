@@ -12,6 +12,7 @@ def digByDigSqroot(n, desiredDigits):
     x = x+y
   return x
 
+# returns (unit, power) so that the highest hundredth is unit * 100^power
 def _getHighestHundredthPower(n):
   units = n%100
   power = 0
