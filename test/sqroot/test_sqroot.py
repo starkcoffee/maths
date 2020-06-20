@@ -11,9 +11,9 @@ class TestStuff(unittest.TestCase):
     self.assertEqual(digByDigSqroot(1, 1), 1)
     self.assertEqual(digByDigSqroot(1, 2), 1.0)
 
-  def testGetHighestHundredthPower(self):
-    self.assertEqual(sqroot._getHighestHundredthPower(31326), (3, 2))
-    self.assertEqual(sqroot._getHighestHundredthPower(0), (0, 0))
+  def testGetHighestHundredth(self):
+    self.assertEqual(sqroot._getHighestHundredth(31326), (3, 2))
+    self.assertEqual(sqroot._getHighestHundredth(0), (0, 0))
 
   def testClosestInSqrt(self):
     self.assertEqual(sqroot._closestIntSqrt(10), 3)

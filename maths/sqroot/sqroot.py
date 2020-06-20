@@ -1,6 +1,6 @@
 
 def digByDigSqroot(n, desiredDigits):
-  units_highestHundredth, power_highestHundredth = _getHighestHundredthPower(n)
+  units_highestHundredth, power_highestHundredth = _getHighestHundredth(n)
 
   powOf10 = power_highestHundredth 
   x = _closestIntSqrt(units_highestHundredth) * pow(10, powOf10)
@@ -13,7 +13,7 @@ def digByDigSqroot(n, desiredDigits):
   return x
 
 # returns (unit, power) so that the highest hundredth is unit * 100^power
-def _getHighestHundredthPower(n):
+def _getHighestHundredth(n):
   units = n%100
   power = 0
   n = n // 100

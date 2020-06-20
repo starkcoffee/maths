@@ -42,7 +42,7 @@
     [x] move module out of test file
     [x] write a basic test
     [x] reimplement powersOfHundred
-    [ ] implement powersOfHundred for anums
+    [x] implement powersOfHundred for anums
     [ ] rename getHighestHundredthPower to getHighestHundredth
 [ ] implement digbydig sqrt algorithm with arbitrary precision for real numbers
 [ ] change algorithm to work also for numbers < 0

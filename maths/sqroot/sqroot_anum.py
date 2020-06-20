@@ -8,7 +8,7 @@ def digByDigSqroot(anum, desiredDigits):
 
 
 # returns (unit, power) so that the highest hundredth is unit * 10^power
-def _getHighestHundredthPower(anum):
+def _getHighestHundredth(anum):
   w_len = len(anum.w)
   power = math.floor((w_len-1)/2)
   units = 0
