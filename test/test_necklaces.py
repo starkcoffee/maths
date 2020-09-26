@@ -2,6 +2,7 @@ import pytest
 from maths.necklaces import *
 
 def test_generate_tree():
+  assert generate_tree(['A','B','C'], 0) == []
   assert generate_tree(['A','B','C'], 1) == [('A',),('B',),('C',)]
   assert generate_tree(['A','B'], 2) == [('A','A'),('A','B'),('B','A'),('B','B')]
   assert generate_tree(['A','B','C'], 3)[9] == ('B','A','A')

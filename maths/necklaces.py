@@ -15,8 +15,19 @@ def rotations(permutation):
   rotate = lambda perm, offset: tuple( perm[(i+offset) % len(perm)] for i in range(len(perm)) )
   return { rotate(permutation, i) for i in range(len(permutation)) }
 
-# returns tree of permutations of symbols as tuples
+# returns tree of permutations of symbols as a list of tuples
 def generate_tree(symbols, depth):
   tupelised_symbols = [ tuple(a) for a in symbols ]
-  generate_next_branches = lambda acc, _: [ a+b for a in acc for b in tupelised_symbols ]
-  return reduce(generate_next_branches, range(depth-1), tupelised_symbols)
+  return generate_tree_acc(tupelised_symbols, depth, [])
+
+def generate_tree_acc(tupelised_symbols, depth, tree_acc):
+  if depth == 0:
+    return tree_acc
+
+  if tree_acc == []:
+    return generate_tree_acc(tupelised_symbols, depth - 1, tupelised_symbols)
+
+  next_generation_of_tree = [ a+b for a in tree_acc for b in tupelised_symbols ]
+  return generate_tree_acc(tupelised_symbols, depth - 1, next_generation_of_tree) 
+
+  
