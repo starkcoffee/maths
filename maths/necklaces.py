@@ -18,14 +18,13 @@ def rotations(permutation):
 # returns tree of permutations of symbols as a list of tuples
 def generate_tree(symbols, depth):
   tupelised_symbols = [ tuple(a) for a in symbols ]
-  return generate_tree_acc(tupelised_symbols, depth, [])
+  if depth == 0:
+    return []
+  return generate_tree_acc(tupelised_symbols, depth-1, tupelised_symbols)
 
 def generate_tree_acc(tupelised_symbols, depth, tree_acc):
   if depth == 0:
     return tree_acc
-
-  if tree_acc == []:
-    return generate_tree_acc(tupelised_symbols, depth - 1, tupelised_symbols)
 
   next_generation_of_tree = [ a+b for a in tree_acc for b in tupelised_symbols ]
   return generate_tree_acc(tupelised_symbols, depth - 1, next_generation_of_tree) 
