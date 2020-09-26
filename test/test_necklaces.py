@@ -7,6 +7,12 @@ def test_generate_tree_breadth_first():
   assert generate_tree_breadth_first(['A','B'], 2) == [('A','A'),('A','B'),('B','A'),('B','B')]
   assert generate_tree_breadth_first(['A','B','C'], 3)[9] == ('B','A','A')
 
+def test_generate_tree_depth_first():
+  assert generate_tree_depth_first(['A','B','C'], 0) == []
+  assert generate_tree_depth_first(['A','B','C'], 1) == [('A',),('B',),('C',)]
+  assert generate_tree_depth_first(['A','B'], 2) == [('A','A'),('A','B'),('B','A'),('B','B')]
+  assert generate_tree_depth_first(['A','B','C'], 3)[9] == ('B','A','A')
+
 def test_result():
   assert len(necklaces('ABCD',4)) == 70
 

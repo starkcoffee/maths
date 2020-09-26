@@ -17,9 +17,10 @@ def rotations(permutation):
 
 # returns tree of permutations of symbols as a list of tuples
 def generate_tree_breadth_first(symbols, depth):
-  tupelised_symbols = [ tuple(a) for a in symbols ]
   if depth == 0:
     return []
+
+  tupelised_symbols = [ tuple(a) for a in symbols ]
   return generate_tree_breadth_first_acc(tupelised_symbols, depth-1, tupelised_symbols)
 
 def generate_tree_breadth_first_acc(tupelised_symbols, depth, tree_acc):
@@ -29,4 +30,23 @@ def generate_tree_breadth_first_acc(tupelised_symbols, depth, tree_acc):
   next_generation_of_tree = [ a+b for a in tree_acc for b in tupelised_symbols ]
   return generate_tree_breadth_first_acc(tupelised_symbols, depth - 1, next_generation_of_tree) 
 
+def generate_tree_depth_first(symbols, depth):
+  if depth == 0:
+    return []
+
+  tupelised_symbols = [ tuple(a) for a in symbols ]
+  tree = []
+  for symbol in tupelised_symbols:
+    tree = tree + generate_branches_depth_first(tupelised_symbols, depth-1, symbol)
+
+  return tree
   
+def generate_branches_depth_first(tupelised_symbols, depth, branch):
+  if depth == 0:
+    return [ branch ]
+
+  branches = []
+  for symbol in tupelised_symbols:
+    branches = branches + (generate_branches_depth_first(tupelised_symbols, depth-1, branch + symbol))
+  
+  return branches
