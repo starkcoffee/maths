@@ -1,4 +1,5 @@
 from itertools import product
+from functools import reduce
 
 def necklaces(iterable, num):
   
@@ -14,10 +15,8 @@ def rotations(permutation):
   rotate = lambda perm, offset: tuple( perm[(i+offset) % len(perm)] for i in range(len(perm)) )
   return { rotate(permutation, i) for i in range(len(permutation)) }
 
+# returns tree of permutations of symbols as tuples
 def generate_tree(symbols, depth):
   tupelised_symbols = [ tuple(a) for a in symbols ]
-  tree = tupelised_symbols
-  for i in range(depth-1):
-    tree = [ a+b for a in tupelised_symbols for b in tree ]
-  return tree
-
+  generate_next_branches = lambda acc, _: [ a+b for a in acc for b in tupelised_symbols ]
+  return reduce(generate_next_branches, range(depth-1), tupelised_symbols)
