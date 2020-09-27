@@ -36,13 +36,13 @@ def generate_tree_depth_first(symbols, depth):
 
   tupelised_symbols = [ tuple(a) for a in symbols ]
 
-  generate_branches = lambda acc, elem: acc + generate_branches_depth_first(tupelised_symbols, depth-1, elem)
+  generate_branches = lambda acc, elem: acc + generate_tree_depth_first_acc(tupelised_symbols, depth-1, elem)
   return reduce(generate_branches, tupelised_symbols, [])
   
-def generate_branches_depth_first(tupelised_symbols, depth, branch):
+def generate_tree_depth_first_acc(tupelised_symbols, depth, branch):
   if depth == 0:
     return [ branch ]
 
-  generate_branches = lambda acc, elem: acc + generate_branches_depth_first(tupelised_symbols, depth-1, branch + elem)
+  generate_branches = lambda acc, elem: acc + generate_tree_depth_first_acc(tupelised_symbols, depth-1, branch + elem)
   return reduce(generate_branches, tupelised_symbols, [])
 
