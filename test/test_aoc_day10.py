@@ -27,6 +27,27 @@ def line_eqn(p1, p2):
 
   return m, c
 
+def is_on_line(line, point):
+  x, y = point
+  m, c = line
+
+  if m == None:
+    return x == c
+
+  try:
+    m1 = (y - c)/x
+    print(m1)
+    return m1 == m
+  except ZeroDivisionError:
+    return True
+
+def test_is_on_line():
+  assert is_on_line((1,0), (3,3))
+  assert is_on_line((1,0), (1,1))
+  assert is_on_line((1,0), (0,0))
+  assert is_on_line((-1.3333333333333333, 10.666666666666666), (5,4))
+  assert is_on_line((-1.3333333333333333, 10.666666666666666), (2,8))
+
 def test_line_eqn():
   assert line_eqn((3,3),(1,1)) == (1, 0)
   assert line_eqn((1,1),(3,3)) == (1, 0)
