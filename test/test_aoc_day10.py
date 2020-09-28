@@ -1,4 +1,5 @@
 import pytest
+from math import nan
 
 def parse(inputt):
   lines = inputt.split('\n')
@@ -9,6 +10,30 @@ def parse(inputt):
     for x, val in enumerate(line)
     if val == '#'
   ]
+
+# returns (m, c) which represents the line defined by two points
+# where y = mx + c
+# except when its a vertical line, then m=None and c=x
+def line_eqn(p1, p2):
+  (p1_x, p1_y), (p2_x, p2_y) = p1, p2
+
+  try:
+    m = (p2_y - p1_y)/(p2_x - p1_x) 
+    # using the fact that m = (p1_y - y)/(p1_x - x) and when x=0, y=c :
+    c = (p1_y - m*p1_x)
+  except ZeroDivisionError:
+    m = None
+    c = p1_x
+
+  return m, c
+
+def test_line_eqn():
+  assert line_eqn((3,3),(1,1)) == (1, 0)
+  assert line_eqn((1,1),(3,3)) == (1, 0)
+  #TODO how many fp digits do i need to adquately cover all possible lines in the grid?
+  # for now I will use ALL OF THEM
+  assert line_eqn((5,4),(2,8)) == (-1.3333333333333333, 10.666666666666666)
+  assert line_eqn((3,3),(3,1)) == (None, 3)
 
 def test_parse():
   inputt = '''
@@ -24,5 +49,4 @@ def test_parse():
     (4,3),
     (3,4),(4,4)
   ]
-
 
