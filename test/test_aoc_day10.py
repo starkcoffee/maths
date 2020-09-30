@@ -37,9 +37,38 @@ def is_on_line(line, point):
   try:
     m1 = (y - c)/x
     print(m1)
-    return m1 == m
+    return round(m1,6) == round(m,6)
   except ZeroDivisionError:
     return True
+
+class Galaxy: 
+  
+  def __init__(self, points):
+    self.points = points
+    self.lines = {}
+    self.sightLineCounts = dict.fromkeys(points, 0)
+
+  def addNewLine(self, p1, p2):
+    line = line_eqn(p1, p2)
+    self.lines[line] = sorted([p1,p2])
+    self.sightLineCounts[p1] += 1
+    self.sightLineCounts[p2] += 1
+
+def test_adding_new_line_to_galaxy():
+  g = Galaxy([(1,1),(3,3)])
+
+  g.addNewLine((1,1),(3,3))
+
+  assert g.lines[(1,0)] == [(1,1),(3,3)]
+  assert g.sightLineCounts[(1,1)] == 1
+  assert g.sightLineCounts[(3,3)] == 1
+
+def test_new_line_stores_points_in_sorted_order():
+  g = Galaxy([(1,1),(3,3)])
+
+  g.addNewLine((3,3),(1,1))
+
+  assert g.lines[(1,0)] == [(1,1),(3,3)]
 
 def test_is_on_line():
   assert is_on_line((1,0), (3,3))
