@@ -31,12 +31,12 @@ def is_on_line(line, point):
   x, y = point
   m, c = line
 
+  # handle vertical lines
   if m == None:
     return x == c
 
   try:
     m1 = (y - c)/x
-    print(m1)
     return round(m1,6) == round(m,6)
   except ZeroDivisionError:
     return True
@@ -48,25 +48,69 @@ class Galaxy:
     self.lines = {}
     self.sightLineCounts = dict.fromkeys(points, 0)
 
-  def addNewLine(self, p1, p2):
+  def add_new_line(self, p1, p2):
     line = line_eqn(p1, p2)
     self.lines[line] = sorted([p1,p2])
     self.sightLineCounts[p1] += 1
     self.sightLineCounts[p2] += 1
 
-def test_adding_new_line_to_galaxy():
+  # line represented as (m, c)
+  def add_to_existing_line(self, p, line):
+    points_on_line = self.lines[line]
+
+    points_on_line = sorted(points_on_line + [p])
+    self.lines[line] = points_on_line
+
+    p_index = points_on_line.index(p)
+    self.sightLineCounts[p] += 1
+    if p_index == 0:
+      self.sightLineCounts[points_on_line[1]] += 1
+    elif p_index == len(points_on_line) - 1:
+      self.sightLineCounts[p_index-1] += 1
+    else:
+      self.sightLineCounts[p] += 1
+
+def test_add_to_existing_line_inc_sightlines_correctly_when_point_not_on_end_of_line():
+  g = Galaxy([(1,1),(2,2),(3,3)])
+  g.add_new_line((1,1),(3,3))
+
+  g.add_to_existing_line((2,2), (1,0))
+
+  assert g.sightLineCounts[(1,1)] == 1
+  assert g.sightLineCounts[(2,2)] == 2
+  assert g.sightLineCounts[(3,3)] == 1
+
+def test_add_to_existing_line_inc_sightlines_correctly_when_point_on_end_of_line():
+  g = Galaxy([(1,1),(2,2),(3,3)])
+  g.add_new_line((2,2),(3,3))
+
+  g.add_to_existing_line((1,1), (1,0))
+
+  assert g.sightLineCounts[(1,1)] == 1
+  assert g.sightLineCounts[(2,2)] == 2
+  assert g.sightLineCounts[(3,3)] == 1
+
+def test_add_to_existing_line_adds_point_to_points_on_line_in_order():
+  g = Galaxy([(1,1),(2,2),(3,3)])
+  g.add_new_line((1,1),(3,3))
+
+  g.add_to_existing_line((2,2), (1,0))
+
+  assert g.lines[(1,0)] == [(1,1),(2,2),(3,3)]
+
+def test_add_new_line_adds_new_line_to_galaxy():
   g = Galaxy([(1,1),(3,3)])
 
-  g.addNewLine((1,1),(3,3))
+  g.add_new_line((1,1),(3,3))
 
   assert g.lines[(1,0)] == [(1,1),(3,3)]
   assert g.sightLineCounts[(1,1)] == 1
   assert g.sightLineCounts[(3,3)] == 1
 
-def test_new_line_stores_points_in_sorted_order():
+def test_add_new_line_stores_points_in_sorted_order():
   g = Galaxy([(1,1),(3,3)])
 
-  g.addNewLine((3,3),(1,1))
+  g.add_new_line((3,3),(1,1))
 
   assert g.lines[(1,0)] == [(1,1),(3,3)]
 
