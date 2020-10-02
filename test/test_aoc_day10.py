@@ -70,6 +70,22 @@ class Galaxy:
     else:
       self.sightLineCounts[p] += 1
 
+  def station_candidate(self):
+    return max(self.sightLineCounts, key=lambda k: self.sightLineCounts[k])
+ 
+def test_station_candidate_when_single():
+  g = Galaxy([(1,1),(2,2),(3,3)])
+  g.add_new_line((1,1),(3,3))
+  g.add_to_existing_line((2,2), (1,0))
+
+  assert g.station_candidate() == (2,2)
+
+def test_station_candidate_when_multiple():
+  g = Galaxy([(1,1),(2,2),(3,3)])
+  g.add_new_line((1,1),(3,3))
+
+  assert g.station_candidate() == (1,1)
+
 def test_add_to_existing_line_inc_sightlines_correctly_when_point_not_on_end_of_line():
   g = Galaxy([(1,1),(2,2),(3,3)])
   g.add_new_line((1,1),(3,3))
