@@ -1,8 +1,28 @@
-from itertools import product
+from itertools import product, chain
 from functools import reduce
+
+
+def necklace_count_v2(num_colours, length):
+  if length == 1:
+    return num_colours
+
+  factors_excluding_self = factors(length) - {length}
+
+  return (num_colours**length - sum(num_permutations_with_repeating_unit(num_colours, factor) for factor in factors_excluding_self))//length + sum(num_permutations_with_repeating_unit(num_colours, factor)//factor for factor in factors_excluding_self)
+
+def num_permutations_with_repeating_unit(num_colours, length):
+  factors_excluding_self = factors(length) - {length}
+  return num_colours**length - sum(num_permutations_with_repeating_unit(num_colours, factor) for factor in factors_excluding_self)
 
 def necklace_count(num_colours, length):
   return len(necklaces(range(num_colours), length))
+
+# from https://stackoverflow.com/a/38817866
+def factors(n):
+    return set(
+        factor for i in range(1, int(n**0.5) + 1) if n % i == 0
+        for factor in (i, n//i)
+    )
 
 def necklaces(iterable, num):
   necklaces = set()
@@ -11,13 +31,10 @@ def necklaces(iterable, num):
       necklaces.add(p)
 
   return necklaces
-  str_necklaces = {''.join(n) for n in necklaces }
-  return str_necklaces
 
 def rotations(permutation):
   rotate = lambda perm, offset: tuple( perm[(i+offset) % len(perm)] for i in range(len(perm)) )
   return { rotate(permutation, i) for i in range(len(permutation)) }
-
 
 # returns tree of permutations of symbols as a list of tuples
 def generate_tree_breadth_first(symbols, depth):
