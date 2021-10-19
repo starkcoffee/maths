@@ -2,7 +2,7 @@ Task: print N(c) where c = 10000
 
 Performance profiles using cProfile
 
-V1 - using generator for pairs
+[V1 - using generator for pairs](https://github.com/starkcoffee/maths/commit/b41704ecb8b75f1c7b5b1ebaa35b2ccd2a86da22)
 
 ```
          178526833 function calls in 69.853 seconds
@@ -20,7 +20,7 @@ V1 - using generator for pairs
  39268413    2.635    0.000    2.635    0.000 {method 'is_integer' of 'float' objects}
 ```
 
-V2 - using for loops instead of generator for pairs
+[V2 - using for loops instead of generator for pairs](https://github.com/starkcoffee/maths/commit/c113cebbbcb749379d70087cd4fcff9df949e81a)
 
 ```
          78522688 function calls in 48.299 seconds
@@ -36,7 +36,7 @@ V2 - using for loops instead of generator for pairs
  39261342    2.458    0.000    2.458    0.000 {method 'is_integer' of 'float' objects}
 ```
 
-V3 - break when the sum of squares for (x,b) is larger than c squard
+[V3 - break when the sum of squares for (x,b) is larger than c squared](https://github.com/starkcoffee/maths/commit/62e053750e3fcd9a256bc57a1f5f843f93e381e9)
 
 ```
          78522688 function calls in 41.187 seconds
@@ -52,7 +52,7 @@ V3 - break when the sum of squares for (x,b) is larger than c squard
  39261342    2.467    0.000    2.467    0.000 {method 'is_integer' of 'float' objects}
 ```
 
-V4 - use set comparison rather than sqrt
+[V4 - use set comparison rather than sqrt](https://github.com/starkcoffee/maths/commit/8a9d24e55c12f8422e4ef58b8da90b78ff70a772)
 
 ```
          10004 function calls in 29.056 seconds
