@@ -10,8 +10,9 @@ def num_triplets(n):
 
   count = 0
   for b in range(1, n):
+    b_squared = b**2
     for a in range(1, b):
-      c_squared = a**2 + b**2
+      c_squared = a**2 + b_squared
       if(c_squared < n_squared):
         if(c_squared in all_c_squares):
           #print(f'{a},{b},{int(sqrt(c_squared))}')
@@ -22,11 +23,12 @@ def num_triplets(n):
   return count
 
 #print(num_triplets(1000))
-#cProfile.run('num_triplets(10000)')
+cProfile.run('num_triplets(10000)')
 
+'''
 c=100
 while(True):
   print(f'N(c) for c = {c}: {num_triplets(c)/c}')
   c*=10
-
+'''
 

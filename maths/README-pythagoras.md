@@ -81,3 +81,18 @@ V5 - stop squaring n in the inner loop 😅
         1    0.000    0.000   20.995   20.995 {built-in method builtins.exec}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 ```
+
+V6 - memoize b squared
+
+```
+         10004 function calls in 11.765 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   11.765   11.765 <string>:1(<module>)
+        1   11.761   11.761   11.765   11.765 pythagoras.py:5(num_triplets)
+    10000    0.004    0.000    0.004    0.000 pythagoras.py:8(<genexpr>)
+        1    0.000    0.000   11.765   11.765 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```
