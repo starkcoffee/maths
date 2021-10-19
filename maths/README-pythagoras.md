@@ -52,5 +52,18 @@ V3 - break when the sum of squares for (x,b) is larger than c squard
  39261342    2.467    0.000    2.467    0.000 {method 'is_integer' of 'float' objects}
 ```
 
+V4 - use set comparison rather than sqrt
 
+```
+         10004 function calls in 29.056 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   29.056   29.056 <string>:1(<module>)
+        1   29.053   29.053   29.056   29.056 pythagoras.py:5(num_triplets)
+    10000    0.003    0.000    0.003    0.000 pythagoras.py:8(<genexpr>)
+        1    0.000    0.000   29.056   29.056 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```
 
