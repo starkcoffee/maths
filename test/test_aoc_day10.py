@@ -1,5 +1,6 @@
 import pytest
 from math import nan
+from collections import defaultdict
 
 def parse(inputt):
   lines = inputt.split('\n')
@@ -43,10 +44,10 @@ def is_on_line(line, point):
 
 class Galaxy: 
   
-  def __init__(self, points):
-    self.points = points
+  def __init__(self):
+    self.points = set()
     self.lines = {}
-    self.sightLineCounts = dict.fromkeys(points, 0)
+    self.sightLineCounts = defaultdict(lambda: 0)
 
   def add_new_line(self, p1, p2):
     line = line_eqn(p1, p2)
@@ -66,28 +67,56 @@ class Galaxy:
     if p_index == 0:
       self.sightLineCounts[points_on_line[1]] += 1
     elif p_index == len(points_on_line) - 1:
-      self.sightLineCounts[p_index-1] += 1
+      self.sightLineCounts[points_on_line[p_index-1]] += 1
     else:
       self.sightLineCounts[p] += 1
 
+  def add_point(self, point):
+    points_to_exclude_when_building_new_lines = [point]
+    for line in self.lines:
+        print(line)
+        if is_on_line(line, point):
+          points_to_exclude_when_building_new_lines += self.lines[line]
+          self.add_to_existing_line(point, line)
+
+    for p_other in set(self.points) - set(points_to_exclude_when_building_new_lines):
+      self.add_new_line(point, p_other)
+    self.points.add(point)
+
   def station_candidate(self):
     return max(self.sightLineCounts, key=lambda k: self.sightLineCounts[k])
+
+def find_station_candidate(inputt):
+  points = parse(inputt)
+  g = Galaxy()
+  for point in points:
+    g.add_point(point)
+  print(g.sightLineCounts)
+  return g.station_candidate()
+
+def test_find_station_candidate():
+  inputt = '''
+.#..#
+.....
+#####
+'''
+  assert find_station_candidate(inputt) == (3,4)
  
 def test_station_candidate_when_single():
-  g = Galaxy([(1,1),(2,2),(3,3)])
+  g = Galaxy()
   g.add_new_line((1,1),(3,3))
   g.add_to_existing_line((2,2), (1,0))
 
   assert g.station_candidate() == (2,2)
 
 def test_station_candidate_when_multiple():
-  g = Galaxy([(1,1),(2,2),(3,3)])
+  g = Galaxy()
   g.add_new_line((1,1),(3,3))
 
   assert g.station_candidate() == (1,1)
 
 def test_add_to_existing_line_inc_sightlines_correctly_when_point_not_on_end_of_line():
-  g = Galaxy([(1,1),(2,2),(3,3)])
+  g = Galaxy()
   g.add_new_line((1,1),(3,3))
 
   g.add_to_existing_line((2,2), (1,0))
@@ -96,8 +125,8 @@ def test_add_to_existing_line_inc_sightlines_correctly_when_point_not_on_end_of_
   assert g.sightLineCounts[(2,2)] == 2
   assert g.sightLineCounts[(3,3)] == 1
 
-def test_add_to_existing_line_inc_sightlines_correctly_when_point_on_end_of_line():
-  g = Galaxy([(1,1),(2,2),(3,3)])
+def test_add_to_existing_line_inc_sightlines_correctly_when_point_at_beginning_of_line():
+  g = Galaxy()
   g.add_new_line((2,2),(3,3))
 
   g.add_to_existing_line((1,1), (1,0))
@@ -106,8 +135,18 @@ def test_add_to_existing_line_inc_sightlines_correctly_when_point_on_end_of_line
   assert g.sightLineCounts[(2,2)] == 2
   assert g.sightLineCounts[(3,3)] == 1
 
+def test_add_to_existing_line_inc_sightlines_correctly_when_point_at_end_of_line():
+  g = Galaxy()
+  g.add_new_line((1,1),(2,2))
+
+  g.add_to_existing_line((3,3), (1,0))
+
+  assert g.sightLineCounts[(1,1)] == 1
+  assert g.sightLineCounts[(2,2)] == 2
+  assert g.sightLineCounts[(3,3)] == 1
+
 def test_add_to_existing_line_adds_point_to_points_on_line_in_order():
-  g = Galaxy([(1,1),(2,2),(3,3)])
+  g = Galaxy()
   g.add_new_line((1,1),(3,3))
 
   g.add_to_existing_line((2,2), (1,0))
@@ -115,7 +154,7 @@ def test_add_to_existing_line_adds_point_to_points_on_line_in_order():
   assert g.lines[(1,0)] == [(1,1),(2,2),(3,3)]
 
 def test_add_new_line_adds_new_line_to_galaxy():
-  g = Galaxy([(1,1),(3,3)])
+  g = Galaxy()
 
   g.add_new_line((1,1),(3,3))
 
@@ -124,7 +163,7 @@ def test_add_new_line_adds_new_line_to_galaxy():
   assert g.sightLineCounts[(3,3)] == 1
 
 def test_add_new_line_stores_points_in_sorted_order():
-  g = Galaxy([(1,1),(3,3)])
+  g = Galaxy()
 
   g.add_new_line((3,3),(1,1))
 

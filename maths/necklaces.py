@@ -8,8 +8,7 @@ def necklace_count_v2(num_colours, length):
 
   factors_excluding_self = factors(length) - {length}
 
-  return (num_colours**length - sum(num_permutations_with_repeating_unit(num_colours, factor) for factor in factors_excluding_self))//length + 
-  sum(num_permutations_with_repeating_unit(num_colours, factor)//factor for factor in factors_excluding_self)
+  return (num_colours**length - sum(num_permutations_with_repeating_unit(num_colours, factor) for factor in factors_excluding_self))//length + sum(num_permutations_with_repeating_unit(num_colours, factor)//factor for factor in factors_excluding_self)
 
 def num_permutations_with_repeating_unit(num_colours, length):
   factors_excluding_self = factors(length) - {length}

@@ -38,13 +38,13 @@
 [x] remove leading zeroes in anum constructor
 [x] find out how many digits of sqrt 2 I can print using float/double whatever - 16
 [ ] print arbitrary precision of sqrt 2
-  [ ] implement digbydig sqrt algorithm with arbitrary precision for integers
+  [x] implement digbydig sqrt algorithm with arbitrary precision for integers
     [x] move module out of test file
     [x] write a basic test
     [x] reimplement powersOfHundred
     [x] implement powersOfHundred for anums
-    [ ] rename getHighestHundredthPower to getHighestHundredth
-[ ] implement digbydig sqrt algorithm with arbitrary precision for real numbers
+    [x] rename getHighestHundredthPower to getHighestHundredth
+  [ ] implement digbydig sqrt algorithm with arbitrary precision for real numbers
 [ ] change algorithm to work also for numbers < 0
 [ ] understand, with some experiments, IEEE floats
 [ ] print statements that tell me which digit it is evaluating

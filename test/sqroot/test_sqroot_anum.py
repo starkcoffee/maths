@@ -4,7 +4,6 @@ from maths.sqroot.sqroot_anum import *
 
 class TestSqrootAnum(unittest.TestCase):
 
-  @unittest.skip("wip")
   def testDigByDigSqroot(self):
     self.assertEqual(digByDigSqroot(Anum([1]), 1), Anum([1]))
     self.assertEqual(digByDigSqroot(Anum([4]), 1), Anum([2]))

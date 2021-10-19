@@ -2,8 +2,15 @@ import sys
 import math
 
 from maths.very_arbitrary_precision.anum import Anum
+from maths.sqroot.sqroot import _closestIntSqrt
 
 def digByDigSqroot(anum, desiredDigits):
+  units_highestHundredth, power_highestHundredth = _getHighestHundredth(anum)
+
+  powOf10 = power_highestHundredth 
+  x = _closestIntSqrt(units_highestHundredth) * pow(10, powOf10)
+  remainder = n - x*x
+
   return anum 
 
 
