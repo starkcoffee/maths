@@ -36,4 +36,21 @@ V2 - using for loops instead of generator for pairs
  39261342    2.458    0.000    2.458    0.000 {method 'is_integer' of 'float' objects}
 ```
 
+V3 - break when the sum of squares for (x,b) is larger than c squard
+
+```
+         78522688 function calls in 41.187 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   41.187   41.187 <string>:1(<module>)
+        1   35.730   35.730   41.187   41.187 pythagoras.py:5(num_triplets)
+        1    0.000    0.000   41.187   41.187 {built-in method builtins.exec}
+ 39261342    2.990    0.000    2.990    0.000 {built-in method math.sqrt}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+ 39261342    2.467    0.000    2.467    0.000 {method 'is_integer' of 'float' objects}
+```
+
+
 

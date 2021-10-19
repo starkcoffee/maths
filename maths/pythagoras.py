@@ -13,9 +13,12 @@ def num_triplets(n):
         if(c.is_integer()):
           #print(f'{a},{b},{int(c)}')
           count+=1
+      else:
+        # pairs are in increasing order so we can break to the next b
+        break
   return count
 
-#print(num_triplets(100))
+#print(num_triplets(1000))
 cProfile.run('num_triplets(10000)')
 
 
