@@ -67,3 +67,17 @@ Performance profiles using cProfile
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 ```
 
+V5 - stop squaring n in the inner loop 😅 
+
+```
+         10004 function calls in 20.995 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   20.995   20.995 <string>:1(<module>)
+        1   20.991   20.991   20.995   20.995 pythagoras.py:5(num_triplets)
+    10000    0.004    0.000    0.004    0.000 pythagoras.py:8(<genexpr>)
+        1    0.000    0.000   20.995   20.995 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```
