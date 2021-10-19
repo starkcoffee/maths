@@ -1,6 +1,8 @@
 Task: print N(c) where c = 10000
 
-First version profile results:
+Performance profiles using cProfile
+
+V1 - using generator for pairs
 
 ```
          178526833 function calls in 69.853 seconds
@@ -17,3 +19,21 @@ First version profile results:
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
  39268413    2.635    0.000    2.635    0.000 {method 'is_integer' of 'float' objects}
 ```
+
+V2 - using for loops instead of generator for pairs
+
+```
+         78522688 function calls in 48.299 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   48.299   48.299 <string>:1(<module>)
+        1   42.757   42.757   48.299   48.299 pythagoras.py:5(num_triplets)
+        1    0.000    0.000   48.299   48.299 {built-in method builtins.exec}
+ 39261342    3.084    0.000    3.084    0.000 {built-in method math.sqrt}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+ 39261342    2.458    0.000    2.458    0.000 {method 'is_integer' of 'float' objects}
+```
+
+
