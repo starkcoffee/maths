@@ -96,3 +96,19 @@ V6 - memoize b squared
         1    0.000    0.000   11.765   11.765 {built-in method builtins.exec}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 ```
+
+V7 - retrieve all squares from list rather than squaring
+
+```
+         5 function calls in 5.285 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    5.285    5.285 <string>:1(<module>)
+        1    5.282    5.282    5.284    5.284 pythagoras.py:5(num_triplets)
+        1    0.002    0.002    0.002    0.002 pythagoras.py:8(<listcomp>)
+        1    0.000    0.000    5.285    5.285 {built-in method builtins.exec}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```
+```

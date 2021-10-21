@@ -5,24 +5,29 @@ import cProfile
 def num_triplets(n):
 
   # generate the set of all squares less than n
-  all_c_squares = set((c**2 for c in range(1,n)))
+  all_squares_list = [i**2 for i in range(1,n)]
+  all_squares_set = set(all_squares_list)
   n_squared = n**2
 
+  # for each pair of squares
   count = 0
   for b in range(1, n):
-    b_squared = b**2
+    b_squared = all_squares_list[b-1]
     for a in range(1, b):
-      c_squared = a**2 + b_squared
+      a_squared = all_squares_list[a-1]
+      c_squared = a_squared + b_squared
       if(c_squared < n_squared):
-        if(c_squared in all_c_squares):
+        if(c_squared in all_squares_set):
           #print(f'{a},{b},{int(sqrt(c_squared))}')
           count+=1
+          #if(count % 1000 == 0):
+          #  print(count)
       else:
         # pairs are in increasing order so we can break to the next b
         break
   return count
 
-#print(num_triplets(1000))
+#print(num_triplets(10000)/10000)
 cProfile.run('num_triplets(10000)')
 
 '''
