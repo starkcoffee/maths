@@ -1,5 +1,6 @@
 from math import sqrt
 import cProfile
+from numpy import gcd
 
 #return number of triplets with c less than n
 def num_triplets(n):
@@ -18,17 +19,17 @@ def num_triplets(n):
       c_squared = a_squared + b_squared
       if(c_squared < n_squared):
         if(c_squared in all_squares_set):
+          if (gcd(a,b) == 1):
+            count+=1
           #print(f'{a},{b},{int(sqrt(c_squared))}')
-          count+=1
-          #if(count % 1000 == 0):
-          #  print(count)
       else:
         # pairs are in increasing order so we can break to the next b
         break
   return count
 
-#print(num_triplets(10000)/10000)
-cProfile.run('num_triplets(10000)')
+
+print(num_triplets(1_000_000)/1_000_000)
+#cProfile.run('num_triplets(10000)')
 
 '''
 c=100
@@ -36,4 +37,3 @@ while(True):
   print(f'N(c) for c = {c}: {num_triplets(c)/c}')
   c*=10
 '''
-
