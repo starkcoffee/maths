@@ -21,7 +21,7 @@ redesign options to fit stuff in memory
 """
 
 """
-FIRST APPROACH WITH ITERATOR
+FIRST APPROACH WITH GENERATOR
 """
 def gen_pairs(spells, potions):
     for spell in spells:
