@@ -1,0 +1,67 @@
+pi := 3.14159265359
+
+center_x := 50
+center_y := 50
+
+radius := 20
+
+// we start at angle 0 degrees
+degrees := 0
+// and increase the angle by this many degrees per second
+degrees_per_second := 50
+
+pause := false
+
+// "on animate" gets called 60 times a second
+on animate
+
+    if pause
+        return
+    end
+
+    degrees = (degrees + degrees_per_second / 60)
+    radians := to_radians (degrees)
+
+    x := radius * (cos radians) + center_x
+    y := radius * (sin radians) + center_y
+
+    clear
+    gridn center_x "lightgrey"
+
+    width 0.3
+    move center_x center_y
+
+    // draw circle
+    colour "black"
+    fill "none"
+    circle radius
+
+    // draw radisus
+    width 0.5
+    colour "black"
+    line x y
+
+    // after one revolution, draw vertical and horizontal
+    // sides of the triangle which has the radius as the hypotenuse
+    if degrees > 360
+        colour "red"
+        line x center_y
+
+        colour "blue"
+        line center_x center_y
+    end
+
+    // red dot
+    move x y
+    colour "red"
+    circle 1
+end
+
+on down
+    pause = !pause
+end
+
+func to_radians:num degrees:num
+    return degrees / 360 * 2 * pi
+end
+
