@@ -1,0 +1,32 @@
+
+//plot x and y where x is degrees and y is the sine value of the /ngle/
+//plot 0 0
+//plot 75 0.966
+//plot 360 0
+//plot 180 0
+//plot 90 1
+//plot 110 0.94
+//plot 135 0.71
+//plot 210 -0.5
+//pl 270 -1
+//plot 305 -0.82
+//plot 340 -0.34
+plot 0 0
+
+pi := 3.14159265359
+
+for x := range 0 360 5
+    // degrees vs radians
+    sin_of_x := sin (to_radians (x))
+    plot x sin_of_x
+end
+
+func plot x:num y:num
+    move 50+x*50/360 50+y*25
+    circle 1
+end
+
+func to_radians:num degrees:num
+    return degrees / 360 * 2 * pi
+end
+
