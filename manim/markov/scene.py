@@ -2,23 +2,23 @@ from manim import *
 
 class GraphDiagram(Scene):
   def construct(self):
-    d, s = ("Dirac", "Strozier")
-    vertices = [d, s]
-    edges = [(d,s), (s,d)]
-    edge_config = {
-      "stroke_width": 2,
-      "tip_config": {"tip_length": 0.25, "tip_width": 0.25},
-    }
 
-    g = DiGraph(
-      vertices,
-      edges,
-      edge_type=mobject.geometry.arc.CurvedDoubleArrow,
-      labels=True,
-      #edge_config=edge_config,
-    ).scale(1.4)
+    node1 = Circle(color=ORANGE, fill_opacity=1)
+    node1.shift(3*LEFT)
 
-    self.add(g)
+    node2 = Circle(color=BLUE, fill_opacity=1)
+    node2.shift(3*RIGHT)
+
+    path1 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
+    path1.shift(0.5*UP)
+
+    path2 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
+    path2.shift(0.5*DOWN)
+
+    self.add(node1)
+    self.add(node2)
+    self.add(path1)
+    self.add(path2)
     self.wait(3)
     
 
