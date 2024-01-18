@@ -1,4 +1,5 @@
 from manim import *
+from np import array
 
 class GraphDiagram(Scene):
   def construct(self):
@@ -15,10 +16,19 @@ class GraphDiagram(Scene):
     path2 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
     path2.shift(0.5*DOWN)
 
+    path3 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
+    path3.add_tip()
+    path4 = path3.copy().flip()
+
+    path3.shift(3.5*LEFT).shift(1.3*UP)
+    path4.center().shift(3.5*RIGHT).shift(1.47*UP)
+
     self.add(node1)
     self.add(node2)
     self.add(path1)
     self.add(path2)
+    self.add(path3)
+    self.add(path4)
     self.wait(3)
     
 
