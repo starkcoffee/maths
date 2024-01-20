@@ -13,9 +13,6 @@ class GraphDiagram(Scene):
     path1 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
     path1.shift(0.5*UP)
 
-    arc1= path1.copy()
-    arc1.stroke_color = ORANGE
-
     path2 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
     path2.shift(0.5*DOWN)
 
@@ -26,11 +23,25 @@ class GraphDiagram(Scene):
     path3.shift(3.5*LEFT).shift(1.3*UP)
     path4.center().shift(3.5*RIGHT).shift(1.47*UP)
 
+    d1 = Dot().set_color(ORANGE)
+    d2 = Dot().set_color(BLUE)
+    d3 = Dot().set_color(ORANGE)
+    d4 = Dot().set_color(BLUE)
+
+    d1_movement = MoveAlongPath(d1, path1)
+    d2_movement = MoveAlongPath(d2, path2)
+    d3_movement = MoveAlongPath(d3, path3)
+    d4_movement = MoveAlongPath(d4, path4)
+
     self.add(node1, node2)
     self.add(path1, path2, path3, path4)
-    self.wait(2)
-    for i in range(5):
-      self.play(Create(arc1))
+    self.wait(1)
+    for i in range(10):
+      if i%2==0:
+        self.play(d1_movement, d2_movement, d3_movement, d4_movement, rate_func=linear, run_time=1.5)
+      else:
+        self.play(d1_movement, d2_movement, rate_func=linear, run_time=1.5)
+
     
 
 class NumBooksBarChart(Scene):
