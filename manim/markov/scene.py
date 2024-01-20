@@ -13,6 +13,9 @@ class GraphDiagram(Scene):
     path1 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
     path1.shift(0.5*UP)
 
+    arc1= path1.copy()
+    arc1.stroke_color = ORANGE
+
     path2 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
     path2.shift(0.5*DOWN)
 
@@ -23,11 +26,11 @@ class GraphDiagram(Scene):
     path3.shift(3.5*LEFT).shift(1.3*UP)
     path4.center().shift(3.5*RIGHT).shift(1.47*UP)
 
-    self.add(node1)
-    self.add(node2)
-    self.play(Create(path1), Create(path2))
-    self.play(Create(path3), Create(path4))
-    self.wait(3)
+    self.add(node1, node2)
+    self.add(path1, path2, path3, path4)
+    self.wait(2)
+    for i in range(5):
+      self.play(Create(arc1))
     
 
 class NumBooksBarChart(Scene):
