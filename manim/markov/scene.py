@@ -25,10 +25,8 @@ class GraphDiagram(Scene):
 
     self.add(node1)
     self.add(node2)
-    self.add(path1)
-    self.add(path2)
-    self.add(path3)
-    self.add(path4)
+    self.play(Create(path1), Create(path2))
+    self.play(Create(path3), Create(path4))
     self.wait(3)
     
 
