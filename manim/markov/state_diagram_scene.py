@@ -1,6 +1,26 @@
 from manim import *
 from np import array
 
+class Library(Scene):
+  def construct(self):
+
+    building = Rectangle(color=ORANGE, fill_opacity=0, height=1.5, width=2)
+    window = Rectangle(color=ORANGE, fill_opacity=0, height=0.5, width=0.3)
+    windows = Group(window, window.copy(), window.copy(), window.copy()).arrange(buff=0.15)
+    windows.shift(0.3*UP)
+    door = Rectangle(color=ORANGE, fill_opacity=1, height=0.5, width=0.4)
+    door.align_to(building, DOWN)
+
+    library1 = Group(building, windows, door)
+    library2 = library1.copy()
+    library2.set_color(BLUE)
+    library1.shift(3*LEFT)
+    library2.shift(3*RIGHT)
+
+    self.add(library1)
+    self.add(library2)
+
+
 class StateDiagram(Scene):
   def construct(self):
 
