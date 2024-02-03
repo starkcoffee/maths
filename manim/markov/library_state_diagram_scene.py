@@ -21,20 +21,29 @@ class Library(Scene):
     node1to1 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
     node1to1.add_tip()
     node1to1.shift(3.5*LEFT).shift(1.3*UP)
+    node1to1_label = Text("0.8").next_to(node1to1, LEFT)
 
     node1to2 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
     node1to2.shift(0.5*UP)
+    node1to2_label = Text("0.2").next_to(node1to2, UP)
 
     node2to2 = node1to1.copy().flip()
     node2to2.center().shift(3.5*RIGHT).shift(1.47*UP)
+    node2to2_label = Text("0.6").next_to(node2to2, RIGHT)
 
     node2to1 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
     node2to1.shift(0.5*DOWN)
+    node2to1_label = Text("0.4").next_to(node2to1, DOWN)
 
     self.play(Create(node1to1))
+    self.add(node1to1_label)
     self.play(Create(node1to2))
+    self.add(node1to2_label)
+    self.wait(1)
     self.play(Create(node2to2))
+    self.add(node2to2_label)
     self.play(Create(node2to1))
+    self.add(node2to1_label)
 
     return node1to1, node1to2, node2to2, node2to1
 
