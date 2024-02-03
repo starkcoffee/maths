@@ -4,22 +4,30 @@ from np import array
 class Library(Scene):
   def construct(self):
     
-    book = SVGMobject("emoji_u1f4d5.svg")
-    book.scale(0.25)
-
-    library1 = create_library(ORANGE)
-    library2 = create_library(BLUE)
-    library1.shift(3*LEFT)
-    library2.shift(3*RIGHT)
-
-    start = library1.get_edge_center(DOWN)
-    end = start + DOWN*2
-    line = Line(start,end)
+    library1, library2 = create_libraries()
+    book = create_book()
+    
+    lineExitLibrary1 = Line(library1.get_edge_center(DOWN), library1.get_edge_center(DOWN)+DOWN*2)
+    lineExitLibrary2 = Line(library2.get_edge_center(DOWN), library2.get_edge_center(DOWN)+DOWN*2)
+    lineReenterLibrary1 = Line(lineExitLibrary1.end, lineExitLibrary1.start)
+    lineReenterLibrary2 = Line(lineExitLibrary2.end, lineExitLibrary2.start)
+    lineEnterLibrary2From1 = Line(lineExitLibrary1.end, lineExitLibrary2.end).add_line_to(lineExitLibrary2.start)
+    
 
     self.add(library1)
     self.add(library2)
     self.wait(1)
-    self.play(MoveAlongPath(book,line))
+    self.play(MoveAlongPath(book,lineExitLibrary1))
+    self.wait(1)
+    self.play(MoveAlongPath(book,lineReenterLibrary1))
+    self.wait(0.5)
+    self.remove(book)
+    self.wait(1)
+    self.play(MoveAlongPath(book,lineExitLibrary1))
+    self.wait(1)
+    self.play(MoveAlongPath(book,lineEnterLibrary2From1))
+    self.wait(0.5)
+    self.remove(book)
     self.wait(1)
 
     return
@@ -51,10 +59,19 @@ class Library(Scene):
 
     self.wait(2)
 
+def create_book():
+    book = SVGMobject("emoji_u1f4d5.svg")
+    book.scale(0.25)
+    return book
 
-# returns a Group MObject that is a library
+def create_libraries():
+    library1 = create_library(ORANGE)
+    library2 = create_library(BLUE)
+    library1.shift(3*LEFT)
+    library2.shift(3*RIGHT)
+    return library1, library2
+
 def create_library(color):
-
     building = Rectangle(color=color, fill_opacity=0, height=1.5, width=2)
     window = Rectangle(color=color, fill_opacity=0, height=0.5, width=0.3)
     windows = Group(window, window.copy(), window.copy(), window.copy()).arrange(buff=0.15)
