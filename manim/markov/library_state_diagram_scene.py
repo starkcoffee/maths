@@ -9,8 +9,8 @@ class Library(Scene):
 
     book = self.create_book()
     self.move_book_in_and_out_of_libraries(book, library1, library2)
-    
-    self.wait(1)
+    self.wait(2)
+
     return
 
     node1 = Circle(color=ORANGE, fill_opacity=1)
@@ -61,10 +61,10 @@ class Library(Scene):
     lineReenterLibrary1 = Line(lineExitLibrary1.end, lineExitLibrary1.start)
     lineReenterLibrary2 = Line(lineExitLibrary2.end, lineExitLibrary2.start)
     lineEnterLibrary2From1 = Line(lineExitLibrary1.end, lineExitLibrary2.end).add_line_to(lineExitLibrary2.start)
+    lineEnterLibrary1From2 = Line(lineExitLibrary2.end, lineExitLibrary1.end).add_line_to(lineExitLibrary1.start)
     
     self.play(MoveAlongPath(book,lineExitLibrary1))
     self.wait(1)
-
     self.play(MoveAlongPath(book,lineReenterLibrary1))
     self.wait(0.5)
     self.remove(book)
@@ -72,9 +72,23 @@ class Library(Scene):
 
     self.play(MoveAlongPath(book,lineExitLibrary1))
     self.wait(1)
-
     self.play(MoveAlongPath(book,lineEnterLibrary2From1))
     self.wait(0.5)
+    self.remove(book)
+
+    self.wait(1)
+
+    self.play(MoveAlongPath(book,lineExitLibrary2), run_time=0.5)
+    self.wait(0.12)
+    self.play(MoveAlongPath(book,lineReenterLibrary2), run_time=0.5)
+    self.wait(0.12)
+    self.remove(book)
+    self.wait(0.25)
+
+    self.play(MoveAlongPath(book,lineExitLibrary2), run_time=0.5)
+    self.wait(0.12)
+    self.play(MoveAlongPath(book,lineEnterLibrary1From2), run_time=0.5)
+    self.wait(0.12)
     self.remove(book)
 
     return
