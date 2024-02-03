@@ -11,34 +11,42 @@ class Library(Scene):
     self.move_book_in_and_out_of_libraries(book, library1, library2)
     self.wait(2)
 
-    return
+    self.morph_libraries_into_nodes(library1, library2)
+    self.wait(2)
 
+    self.draw_paths_with_probabilities()
+    self.wait(2)
+
+  def draw_paths_with_probabilities(self):
+    node1to1 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
+    node1to1.add_tip()
+    node1to1.shift(3.5*LEFT).shift(1.3*UP)
+
+    node1to2 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
+    node1to2.shift(0.5*UP)
+
+    node2to2 = node1to1.copy().flip()
+    node2to2.center().shift(3.5*RIGHT).shift(1.47*UP)
+
+    node2to1 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
+    node2to1.shift(0.5*DOWN)
+
+    self.play(Create(node1to1))
+    self.play(Create(node1to2))
+    self.play(Create(node2to2))
+    self.play(Create(node2to1))
+
+    return node1to1, node1to2, node2to2, node2to1
+
+  def morph_libraries_into_nodes(self, library1, library2):
     node1 = Circle(color=ORANGE, fill_opacity=1)
     node1.shift(3*LEFT)
 
     node2 = Circle(color=BLUE, fill_opacity=1)
     node2.shift(3*RIGHT)
 
-    path1 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
-    path1.shift(0.5*UP)
-
-    path2 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
-    path2.shift(0.5*DOWN)
-
-    path3 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
-    path3.add_tip()
-    path4 = path3.copy().flip()
-
-    path3.shift(3.5*LEFT).shift(1.3*UP)
-    path4.center().shift(3.5*RIGHT).shift(1.47*UP)
-
     self.play(Transform(library1, node1), Transform(library2, node2))
-    self.play(Create(path1))
-    self.play(Create(path2))
-    self.play(Create(path3))
-    self.play(Create(path4))
-
-    self.wait(2)
+    return node1, node2
 
   def create_libraries(self):
     library1 = self.create_library(ORANGE)
@@ -78,14 +86,14 @@ class Library(Scene):
 
     self.wait(1)
 
-    self.play(MoveAlongPath(book,lineExitLibrary2), run_time=0.5)
+    self.play(MoveAlongPath(book,lineExitLibrary2), run_time=0.3)
     self.wait(0.12)
-    self.play(MoveAlongPath(book,lineReenterLibrary2), run_time=0.5)
+    self.play(MoveAlongPath(book,lineReenterLibrary2), run_time=0.3)
     self.wait(0.12)
     self.remove(book)
-    self.wait(0.25)
+    self.wait(0.12)
 
-    self.play(MoveAlongPath(book,lineExitLibrary2), run_time=0.5)
+    self.play(MoveAlongPath(book,lineExitLibrary2), run_time=0.3)
     self.wait(0.12)
     self.play(MoveAlongPath(book,lineEnterLibrary1From2), run_time=0.5)
     self.wait(0.12)
