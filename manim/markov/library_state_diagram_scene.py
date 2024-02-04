@@ -11,11 +11,21 @@ class Library(Scene):
     self.move_book_in_and_out_of_libraries(book, library1, library2)
     self.wait(2)
 
-    self.morph_libraries_into_nodes(library1, library2)
+    nodes = self.morph_libraries_into_nodes(library1, library2)
     self.wait(2)
 
-    self.draw_paths_with_probabilities()
+    paths = self.draw_paths_with_probabilities()
     self.wait(2)
+
+    self.move_book_in_markov_path(book, nodes[0], paths)
+    self.wait(2)
+
+  def move_book_in_markov_path(self, book, starting_node, paths):
+    book.move_to(starting_node)
+    self.add(book)
+    self.wait(2)
+    self.play(MoveAlongPath(book,paths[0][0]))
+      
 
   def draw_paths_with_probabilities(self):
     node1to1 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
@@ -45,7 +55,10 @@ class Library(Scene):
     self.play(Create(node2to1))
     self.add(node2to1_label)
 
-    return node1to1, node1to2, node2to2, node2to1
+    return [
+      [node1to1, node1to2],
+      [node2to1, node2to2]
+    ]
 
   def morph_libraries_into_nodes(self, library1, library2):
     node1 = Circle(color=ORANGE, fill_opacity=1)
