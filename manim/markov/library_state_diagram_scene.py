@@ -1,5 +1,11 @@
 from manim import *
 from np import array
+import random
+
+PATH_PROB_00 = 0.8
+PATH_PROB_01 = 0.2
+PATH_PROB_10 = 0.4
+PATH_PROB_11 = 0.6
 
 class Library(Scene):
   def construct(self):
@@ -17,16 +23,26 @@ class Library(Scene):
     paths = self.draw_paths_with_probabilities()
     self.wait(2)
 
-    self.move_book_in_markov_path(book, nodes[0], paths)
+    self.move_book_in_markov_path(book, nodes, paths)
     self.wait(2)
 
-  def move_book_in_markov_path(self, book, starting_node, paths):
-    book.move_to(starting_node)
+  def move_book_in_markov_path(self, book, nodes, paths):
+    starting_node = 0 # at node 0
+    book.move_to(nodes[starting_node])
     self.add(book)
     self.wait(2)
     self.play(MoveAlongPath(book,paths[0][0]))
-      
 
+    next_node = self.get_next_node(starting_node)
+    self.play(MoveAlongPath(book,paths[starting_node][next_node]))
+    self.wait(2)
+
+  def get_next_node(self, current_node):
+    if current_node == 0:
+      return 0 if random.random() <= PATH_PROB_00 else 1
+    else:
+      return 1 if random.random() <= PATH_PROB_11 else 0
+      
   def draw_paths_with_probabilities(self):
     node1to1 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
     node1to1.add_tip()
