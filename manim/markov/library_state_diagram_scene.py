@@ -14,8 +14,8 @@ class Library(Scene):
     self.wait(1)
 
     book = self.create_book()
-    self.move_book_in_and_out_of_libraries(book, library1, library2)
-    self.wait(2)
+    #self.move_book_in_and_out_of_libraries(book, library1, library2)
+    #self.wait(2)
 
     nodes = self.morph_libraries_into_nodes(library1, library2)
     self.wait(2)
@@ -27,14 +27,26 @@ class Library(Scene):
     self.wait(2)
 
   def move_book_in_markov_path(self, book, nodes, paths):
+
+    node_labels = [Text("O,").set_color(ORANGE).scale(1.3), Text("B,").set_color(BLUE).scale(1.5)]
     starting_node = 0 # at node 0
+    starting_label = node_labels[starting_node].copy().shift(DOWN*3).shift(LEFT*5)
     book.move_to(nodes[starting_node])
     self.add(book)
+    self.add(starting_label)
     self.wait(2)
-    self.play(MoveAlongPath(book,paths[0][0]))
 
-    next_node = self.get_next_node(starting_node)
-    self.play(MoveAlongPath(book,paths[starting_node][next_node]))
+    prev_node = starting_node
+    prev_label = starting_label
+    for i in range(10):
+      node = self.get_next_node(starting_node)
+      label = node_labels[node].copy().next_to(prev_label, RIGHT)
+      self.play(MoveAlongPath(book, paths[prev_node][node]))
+      self.add(label)
+      prev_node = node
+      prev_label = label 
+
+    
     self.wait(2)
 
   def get_next_node(self, current_node):
