@@ -24,7 +24,14 @@ class Library(Scene):
     self.wait(2)
 
     self.move_book_in_markov_path(book, nodes, paths)
+    self.wait(1)
+
+    self.highlight_markov_chain()
     self.wait(2)
+
+  def highlight_markov_chain(self):
+    border = Rectangle(color=RED, width=12.0, height=1.5).shift(3*DOWN)
+    self.add(border)
 
   def move_book_in_markov_path(self, book, nodes, paths):
 
@@ -45,9 +52,6 @@ class Library(Scene):
       self.add(label)
       prev_node = node
       prev_label = label 
-
-    
-    self.wait(2)
 
   def get_next_node(self, current_node):
     if current_node == 0:
