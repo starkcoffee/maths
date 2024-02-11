@@ -31,7 +31,8 @@ class Library(Scene):
 
   def highlight_markov_chain(self):
     border = Rectangle(color=RED, width=12.0, height=1.5).shift(3*DOWN)
-    self.add(border)
+    label = Text("Markov Chain").set_color(RED).shift(4.5*LEFT).shift(1.7*DOWN)
+    self.add(border, label)
 
   def move_book_in_markov_path(self, book, nodes, paths):
 
