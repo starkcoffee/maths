@@ -11,23 +11,23 @@ class Library(Scene):
   def construct(self):
     
     library1, library2 = self.create_libraries()
-    self.wait(1)
+    self.pause(1)
 
     book = self.create_book()
-    #self.move_book_in_and_out_of_libraries(book, library1, library2)
-    #self.wait(2)
+    self.move_book_in_and_out_of_libraries(book, library1, library2)
+    self.pause(2)
 
     nodes = self.morph_libraries_into_nodes(library1, library2)
-    self.wait(2)
+    self.pause(2)
 
     paths = self.draw_paths_with_probabilities()
-    self.wait(2)
+    self.pause(2)
 
     self.move_book_in_markov_path(book, nodes, paths)
-    self.wait(1)
+    self.pause(1)
 
     self.highlight_markov_chain()
-    self.wait(2)
+    self.pause(2)
 
   def highlight_markov_chain(self):
     border = Rectangle(color=RED, width=12.0, height=1.5).shift(3*DOWN)
