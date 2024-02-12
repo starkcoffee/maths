@@ -7,15 +7,15 @@ PATH_PROB_01 = 0.2
 PATH_PROB_10 = 0.4
 PATH_PROB_11 = 0.6
 
-class Library(Scene):
+class Library(MovingCameraScene):
   def construct(self):
     
     library1, library2 = self.create_libraries()
     self.pause(1)
 
     book = self.create_book()
-    self.move_book_in_and_out_of_libraries(book, library1, library2)
-    self.pause(2)
+    #self.move_book_in_and_out_of_libraries(book, library1, library2)
+    #self.pause(2)
 
     nodes = self.morph_libraries_into_nodes(library1, library2)
     self.pause(2)
@@ -23,10 +23,13 @@ class Library(Scene):
     paths = self.draw_paths_with_probabilities()
     self.pause(2)
 
-    self.move_book_in_markov_path(book, nodes, paths)
-    self.pause(1)
+    #self.move_book_in_markov_path(book, nodes, paths)
+    #self.pause(1)
 
-    self.highlight_markov_chain()
+    #self.highlight_markov_chain()
+    #self.pause(2)
+
+    self.play(self.camera.frame.animate.scale(2.5).move_to(DL*6.5+LEFT*5))
     self.pause(2)
 
   def highlight_markov_chain(self):
