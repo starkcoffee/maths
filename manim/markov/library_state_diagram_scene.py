@@ -14,8 +14,8 @@ class Library(MovingCameraScene):
     self.pause(1)
 
     book = self.create_book()
-    #self.move_book_in_and_out_of_libraries(book, library1, library2)
-    #self.pause(2)
+    self.move_book_in_and_out_of_libraries(book, library1, library2)
+    self.pause(2)
 
     nodes = self.morph_libraries_into_nodes(library1, library2)
     self.pause(2)
@@ -23,39 +23,49 @@ class Library(MovingCameraScene):
     paths = self.draw_paths_with_probabilities()
     self.pause(2)
 
-    #self.move_book_in_markov_path(book, nodes, paths)
-    #self.pause(1)
+    chain_labels = self.move_book_in_markov_path(book, nodes, paths)
+    self.pause(1)
 
-    #self.highlight_markov_chain()
-    #self.pause(2)
+    highlight = self.highlight_markov_chain()
+    self.pause(1)
 
-    self.play(self.camera.frame.animate.scale(2.5).move_to(DL*6.5+LEFT*5))
+    self.move_graph_scene_to_upper_right(chain_labels, highlight, book)
     self.pause(2)
+
+  def move_graph_scene_to_upper_right(self, chain_labels, highlight, book):
+    self.remove(*chain_labels, highlight, book)
+    self.play(self.camera.frame.animate.scale(2.5).move_to(DL*6.5+LEFT*5))
 
   def highlight_markov_chain(self):
     border = Rectangle(color=RED, width=12.0, height=1.5).shift(3*DOWN)
     label = Text("Markov Chain").set_color(RED).shift(4.5*LEFT).shift(1.7*DOWN)
-    self.add(border, label)
+    highlight = Group(border, label)
+    self.add(highlight)
+    return highlight
 
   def move_book_in_markov_path(self, book, nodes, paths):
-
     node_labels = [Text("O,").set_color(ORANGE).scale(1.3), Text("B,").set_color(BLUE).scale(1.5)]
+    chain_labels = []
     starting_node = 0 # at node 0
     starting_label = node_labels[starting_node].copy().shift(DOWN*3).shift(LEFT*5)
+    chain_labels.append(starting_label)
     book.move_to(nodes[starting_node])
     self.add(book)
     self.add(starting_label)
-    self.wait(2)
+    self.pause(2)
 
     prev_node = starting_node
     prev_label = starting_label
     for i in range(10):
       node = self.get_next_node(starting_node)
       label = node_labels[node].copy().next_to(prev_label, RIGHT)
+      chain_labels.append(label)
       self.play(MoveAlongPath(book, paths[prev_node][node]))
       self.add(label)
       prev_node = node
       prev_label = label 
+
+    return chain_labels
 
   def get_next_node(self, current_node):
     if current_node == 0:
