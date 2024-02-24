@@ -7,7 +7,7 @@ PATH_PROB_01 = 0.2
 PATH_PROB_10 = 0.4
 PATH_PROB_11 = 0.6
 
-class Library(MovingCameraScene):
+class Library(Scene):
   def construct(self):
     
     library1, library2 = self.create_libraries()
@@ -20,7 +20,7 @@ class Library(MovingCameraScene):
     nodes = self.morph_libraries_into_nodes(library1, library2)
     self.pause(2)
 
-    paths = self.draw_paths_with_probabilities()
+    paths, path_labels = self.draw_paths_with_probabilities()
     self.pause(2)
 
     chain_labels = self.move_book_in_markov_path(book, nodes, paths)
@@ -29,12 +29,22 @@ class Library(MovingCameraScene):
     highlight = self.highlight_markov_chain()
     self.pause(1)
 
-    self.move_graph_scene_to_upper_right(chain_labels, highlight, book)
+    self.move_graph_scene_to_upper_right(nodes, paths, path_labels, chain_labels, highlight, book)
     self.pause(2)
 
-  def move_graph_scene_to_upper_right(self, chain_labels, highlight, book):
+    self.create_bar_chart()
+    self.pause(2)
+
+  def create_bar_chart(self):
+    chart = BarChart(values=[70, 30], bar_names=["70%", "30%"])
+    self.add(chart)
+  
+  def move_graph_scene_to_upper_right(self, nodes, paths, path_labels, chain_labels, highlight, book):
     self.remove(*chain_labels, highlight, book)
-    self.play(self.camera.frame.animate.scale(2.5).move_to(DL*6.5+LEFT*5))
+    flattened_paths_list = [path for row in paths for path in row]
+    graph = Group(*nodes, *flattened_paths_list, *path_labels)
+    self.play(graph.animate.scale(0.4).move_to(2.8*UP+4.8*RIGHT))
+    
 
   def highlight_markov_chain(self):
     border = Rectangle(color=RED, width=12.0, height=1.5).shift(3*DOWN)
@@ -74,22 +84,27 @@ class Library(MovingCameraScene):
       return 1 if random.random() <= PATH_PROB_11 else 0
       
   def draw_paths_with_probabilities(self):
+    path_labels = []
     node1to1 = Arc(radius=0.5, start_angle=(335/360)*2*PI, angle=(265/360)*2*PI, num_components=6, arc_center=array([0,0,0]))
     node1to1.add_tip()
     node1to1.shift(3.5*LEFT).shift(1.3*UP)
     node1to1_label = Text("0.8").next_to(node1to1, LEFT)
+    path_labels.append(node1to1_label)
 
     node1to2 = CurvedArrow(2*LEFT, 2*RIGHT, radius= -3.5)
     node1to2.shift(0.5*UP)
     node1to2_label = Text("0.2").next_to(node1to2, UP)
+    path_labels.append(node1to2_label)
 
     node2to2 = node1to1.copy().flip()
     node2to2.center().shift(3.5*RIGHT).shift(1.47*UP)
     node2to2_label = Text("0.6").next_to(node2to2, RIGHT)
+    path_labels.append(node2to2_label)
 
     node2to1 = CurvedArrow(2*RIGHT, 2*LEFT, radius= -3.5)
     node2to1.shift(0.5*DOWN)
     node2to1_label = Text("0.4").next_to(node2to1, DOWN)
+    path_labels.append(node2to1_label)
 
     self.play(Create(node1to1))
     self.add(node1to1_label)
@@ -104,7 +119,7 @@ class Library(MovingCameraScene):
     return [
       [node1to1, node1to2],
       [node2to1, node2to2]
-    ]
+    ], path_labels
 
   def morph_libraries_into_nodes(self, library1, library2):
     node1 = Circle(color=ORANGE, fill_opacity=1)
@@ -114,7 +129,7 @@ class Library(MovingCameraScene):
     node2.shift(3*RIGHT)
 
     self.play(Transform(library1, node1), Transform(library2, node2))
-    return node1, node2
+    return library1, library2
 
   def create_libraries(self):
     library1 = self.create_library(ORANGE)
