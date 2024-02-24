@@ -47,8 +47,8 @@ class Library(Scene):
     
 
   def highlight_markov_chain(self):
-    border = Rectangle(color=RED, width=12.0, height=1.5).shift(3*DOWN)
-    label = Text("Markov Chain").set_color(RED).shift(4.5*LEFT).shift(1.7*DOWN)
+    border = Rectangle(color=PINK, width=12.0, height=1.5).shift(3*DOWN)
+    label = Text("Markov Chain").set_color(PINK).shift(4.5*LEFT).shift(1.7*DOWN)
     highlight = Group(border, label)
     self.add(highlight)
     return highlight
