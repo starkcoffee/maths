@@ -43,7 +43,7 @@ class Library(Scene):
     self.remove(*chain_labels, highlight, book)
     flattened_paths_list = [path for row in paths for path in row]
     graph = Group(*nodes, *flattened_paths_list, *path_labels)
-    self.play(graph.animate.scale(0.4).move_to(2.8*UP+4.8*RIGHT))
+    self.play(graph.animate.scale(0.4).align_on_border(UR))
     
 
   def highlight_markov_chain(self):
