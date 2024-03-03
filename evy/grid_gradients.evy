@@ -1,0 +1,59 @@
+draw_grid
+draw_axes
+
+line_btw_coords 1 1 8 8 "blue"
+
+// draws a line converting our graph coords to evy canvas coords
+// also draws the lines for the x and y components
+func line_btw_coords x1:num y1:num x2:num y2:num col:string
+    // draw desired line
+    width 0.5
+    color col
+    move 10+x1*10 10+y1*10
+    line 10+x2*10 10+y2*10
+
+    // draw x component
+    width 0.25
+    color "grey"
+    move 10+x1*10 10+y1*10
+    line 10+x2*10 10+y1*10
+    // draw y component
+    line 10+x2*10 10+y2*10
+end
+
+func draw_grid
+    width 0.05
+    color "hsl(0deg 100% 0% / 50%)"
+    for i := range 0 101 10
+        move i 0
+        line i 100
+        move 0 i
+        line 100 i
+    end
+end
+
+func draw_axes
+    width 0.5
+    move 0 10
+    line 100 10
+    move 10 0
+    line 10 100
+
+    font {size:5 align:"center"}
+    move 10 8
+    text "0"
+
+    // print x-axis numbers
+    for i := range 1 10
+        move 10+i*10 5
+        label := sprint i
+        text label
+    end
+
+    // print y-axis numbers
+    for i := range 1 10
+        move 7.5 8.5+10*i
+        label := sprint i
+        text label
+    end
+end
