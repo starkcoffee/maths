@@ -10,6 +10,7 @@ PATH_PROB_11 = 0.6
 class Library(Scene):
   def construct(self):
     
+    """
     library1, library2 = self.create_libraries()
     self.pause(1)
 
@@ -31,13 +32,18 @@ class Library(Scene):
 
     self.move_graph_scene_to_upper_right(nodes, paths, path_labels, chain_labels, highlight, book)
     self.pause(2)
+    """
 
     self.create_bar_chart()
     self.pause(2)
 
   def create_bar_chart(self):
-    chart = BarChart(values=[70, 30], bar_names=["70%", "30%"])
+    chart = BarChart(values=[70, 30], bar_names=["70%", "30%"], y_range=[0,100], axis_config={'include_ticks': False, 'include_numbers': False})
     self.add(chart)
+    custom_y_axis = NumberLine(include_ticks=False, length=4, include_tip=True, rotation=90*DEGREES)
+    custom_y_axis.move_to(chart.x_axis.get_start(), aligned_edge=DOWN)
+    self.remove(chart.y_axis)
+    self.add(custom_y_axis)
   
   def move_graph_scene_to_upper_right(self, nodes, paths, path_labels, chain_labels, highlight, book):
     self.remove(*chain_labels, highlight, book)
