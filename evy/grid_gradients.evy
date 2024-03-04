@@ -1,7 +1,35 @@
-draw_grid
+// setup grid
+tx := 10
+ty := 10
+scale := 10
+xmin := (0 - tx) / scale
+xmax := (100 - tx) / scale
+ymin := (0 - ty) / scale
+ymax := (100 - ty) / scale
+gridn scale "grey"
 draw_axes
 
-line_btw_coords 1 1 8 8 "blue"
+// challenge: draw a line with a negative slope
+// line_btw_coords ? ? ? ?
+
+// slope = 5/4 = 1.25 = 1 1/4
+line_btw_coords 2 2 6 7 "pink"
+
+// create a line with slope = 1
+// this is the line y = x, it makes a 45 degree angle with x-axis
+line_btw_coords 2 2 6 6 "violet"
+
+// slope = 5/0 = undefined / infinity
+line_btw_coords 2 2 2 7 "green"
+
+// 6 steps in x direction
+// 2 steps in y direction
+// slope = rise / run = steps-in-y-direction / steps-in-x-direction
+// 2/6 = 0.3333333 = 1/3
+line_btw_coords 2 2 8 4 "orange"
+
+// slope = 0/6 = 0
+line_btw_coords 2 2 8 2 "blue"
 
 // draws a line converting our graph coords to evy canvas coords
 // also draws the lines for the x and y components
@@ -9,51 +37,45 @@ func line_btw_coords x1:num y1:num x2:num y2:num col:string
     // draw desired line
     width 0.5
     color col
-    move 10+x1*10 10+y1*10
-    line 10+x2*10 10+y2*10
+    move tx+x1*scale ty+y1*scale
+    line tx+x2*scale ty+y2*scale
 
     // draw x component
     width 0.25
     color "grey"
-    move 10+x1*10 10+y1*10
-    line 10+x2*10 10+y1*10
+    move tx+x1*scale ty+y1*scale
+    line tx+x2*scale ty+y1*scale
     // draw y component
-    line 10+x2*10 10+y2*10
-end
-
-func draw_grid
-    width 0.05
-    color "hsl(0deg 100% 0% / 50%)"
-    for i := range 0 101 10
-        move i 0
-        line i 100
-        move 0 i
-        line 100 i
-    end
+    line tx+x2*scale ty+y2*scale
 end
 
 func draw_axes
     width 0.5
-    move 0 10
-    line 100 10
-    move 10 0
-    line 10 100
+    move 0 ty
+    line 100 ty
+    move tx 0
+    line tx 100
 
-    font {size:5 align:"center"}
-    move 10 8
+    font {size:5 align:"center" baseline:"middle"}
+    move tx ty
     text "0"
 
     // print x-axis numbers
-    for i := range 1 10
-        move 10+i*10 5
-        label := sprint i
-        text label
+    for i := range xmin xmax+1
+        if i != 0
+            move tx+i*scale ty-3
+            label := sprint i
+            text label
+        end
     end
 
     // print y-axis numbers
-    for i := range 1 10
-        move 7.5 8.5+10*i
-        label := sprint i
-        text label
+    for i := range ymin ymax+1
+        if i != 0
+            move tx-3 ty+i*scale
+            label := sprint i
+            text label
+        end
     end
 end
+
