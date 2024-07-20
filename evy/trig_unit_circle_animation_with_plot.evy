@@ -1,0 +1,120 @@
+pi := 3.14159265359
+
+center_x := 50
+center_y := 70
+
+radius := 20
+
+// we start at angle 0 degrees
+degrees := 0
+// and increase the angle by this many degrees per second
+degrees_per_second := 50
+
+pause := false
+font {size:4 align:"center" baseline:"middle"}
+
+graph_x_origin := 10
+graph_y_origin := 22
+delta_x := 5
+graph_x := graph_x_origin
+graph_y := 0
+graph_y_cos := 1
+
+// "on animate" gets called 60 times a second
+on animate
+    clear
+
+    plot_axes
+
+    if pause
+        return
+    end
+
+    degrees = (degrees + degrees_per_second / 60)
+    radians := to_radians (degrees)
+
+    x := radius * (cos radians) + center_x
+    y := radius * (sin radians) + center_y
+
+    width 0.3
+    move center_x center_y
+
+    // draw circle
+    colour "black"
+    fill "none"
+    circle radius
+
+    // draw radisus
+    width 0.5
+    colour "black"
+    line x y
+
+    colour "red"
+    line x center_y
+
+    colour "blue"
+    line center_x center_y
+
+    // after one revolution draw graph
+    if degrees > 360
+        plot_graph radians
+    end
+
+    // red dot
+    move x y
+    colour "red"
+    circle 1
+
+end
+
+on down
+    pause = !pause
+end
+
+func plot_axes
+    // graph axes
+    color "black"
+    move 0 22
+    line 100 22
+    move 10 0
+    line 10 44
+
+    // ticks
+    move 10 2
+    line 9 2
+    move 10 42
+    line 9 42
+
+    move 10 21.5
+    text "0"
+    move 7 42
+    text "1"
+    move 6 2
+    text "-1"
+end
+
+func plot_graph radians:num
+    plot_cos := false
+    color "red"
+    if graph_x > 100
+        graph_x = graph_x_origin
+        plot_cos = true
+    end
+    graph_y = graph_y_origin + 20 * (sin radians)
+    graph_y_cos = graph_y_origin + 20 * (cos radians)
+    plot graph_x graph_y
+    if plot_cos
+        plot graph_x graph_y_cos
+    end
+    graph_x = graph_x + delta_x / 60
+end
+
+func to_radians:num degrees:num
+    return degrees / 360 * 2 * pi
+end
+
+func plot x:num y:num
+    move x y
+    circle 0.5
+end
+
