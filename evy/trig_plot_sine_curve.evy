@@ -15,7 +15,7 @@ plot 0 0
 
 pi := 3.14159265359
 
-for x := range 0 360 5
+for x := range 0 360 1
     // degrees vs radians
     sin_of_x := sin (to_radians (x))
     plot x sin_of_x
@@ -23,10 +23,11 @@ end
 
 func plot x:num y:num
     move 50+x*50/360 50+y*25
-    circle 1
+    circle 0.5
 end
 
 func to_radians:num degrees:num
     return degrees / 360 * 2 * pi
 end
+
 
