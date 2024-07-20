@@ -21,14 +21,6 @@ on animate t:num
     draw theta deg
 end
 
-func abs:num z:num
-    if z >= 0
-        return z
-    else
-        return -z
-    end
-end
-
 func draw theta:num deg:num
     clear
     gridn 50 "lightgrey"
